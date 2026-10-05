@@ -2,7 +2,7 @@
 Judge scores and layer names go to results/hand_scores_key.json, not the CSV, so hand-scoring is blind.
 rejudge MODEL: score the same sample with a second judge (stored in the key) for a judge-vs-judge-vs-human comparison.
 agree: after you fill hand_score (1-5, same rubric), compute agreement for every judge in the key."""
-import json, csv, random, sys, statistics
+import json, csv, os, random, sys, statistics
 B={b["id"]:b for b in json.load(open("data/briefs.json"))}
 if sys.argv[1]=="make":
     s=json.load(open("results/heldout_outputs.json")); random.seed(0); pick=random.sample(s,min(10,len(s)))
@@ -31,6 +31,9 @@ else:
     judges={H["judge_model"]:[key[r["row"]]["judge_score"] for r in rows]}
     for m in key[rows[0]["row"]].get("other_judges",{}):
         judges[m]=[key[r["row"]]["other_judges"][m]["judge_score"] for r in rows]
+    if os.path.exists("results/crossjudge.json"):  # same outputs, scored by the other run's judge
+        C=json.load(open("results/crossjudge.json")); by={(c["id"],c["out"]):c["other"]["score"] for c in C["rows"]}
+        judges[C["model"]]=[round(by[(r["id"],r["output"])],2) for r in rows]
     def stats(j):
         mj,mh=statistics.mean(j),statistics.mean(h); mad=statistics.mean(abs(a-b) for a,b in zip(j,h))
         cov=sum((a-mj)*(b-mh) for a,b in zip(j,h)); den=(sum((a-mj)**2 for a in j)*sum((b-mh)**2 for b in h))**.5

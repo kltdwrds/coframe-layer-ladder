@@ -1,0 +1,278 @@
+{
+  "model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+  "n": 2,
+  "rows": [
+    {
+      "layer": "baseline",
+      "id": "orbit-hr",
+      "out": "Here is the landing-page hero copy:\n\n**Streamline Your Onboarding Process with Ease**\n\nSimplify new hire onboarding and reduce time-to-productivity for your employees\n\n**Get Started with Our Customized Onboarding Software**\n\nRequest a personalized demo to see how our solution can benefit your HR team.",
+      "score": 4.75,
+      "other": {
+        "score": 2.625,
+        "criteria": {
+          "brand_fit": 3,
+          "specificity": 1.5,
+          "claim_safety": 4,
+          "goal_fit": 2
+        },
+        "note": "The copy is generic and the CTA requests a demo rather than the stated pricing goal.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "baseline",
+      "id": "fern-vet",
+      "out": "**HEADLINE**\nYour Neighborhood Vet, Open Late for Your Convenience\n\n**SUBHEAD**\nGet the care your pet needs, when you need it, with extended evening hours \n\n**CTA**\nBook Your Appointment Today: (555) 123-4567 or Schedule Online",
+      "score": 4.75,
+      "other": {
+        "score": 4.0,
+        "criteria": {
+          "brand_fit": 4.5,
+          "specificity": 2,
+          "claim_safety": 5,
+          "goal_fit": 4.5
+        },
+        "note": "The biggest weakness is lack of clinic-specific details like name, location, or actual hours, making it generic enough to apply to any vet.",
+        "judge_spread": 0.5
+      }
+    },
+    {
+      "layer": "baseline",
+      "id": "quill-edu",
+      "out": "Here's a possible landing-page hero copy:\n\n**Unleash Your Story**\n\n**Start writing with confidence and clarity**\n\n**Take the first step towards becoming a writer**\n\nEnroll in our online writing course for adult beginners and discover the joy of writing your story.",
+      "score": 4.5,
+      "other": {
+        "score": 3.625,
+        "criteria": {
+          "brand_fit": 4.5,
+          "specificity": 2,
+          "claim_safety": 5,
+          "goal_fit": 3
+        },
+        "note": "The copy is generic and lacks concrete details about the course or cohort, so it could be pasted onto almost any writing course.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "baseline",
+      "id": "mason-solar",
+      "out": "Here is the landing page hero copy:\n\n**Cut Your Energy Bills in Half**\n\nAre you tired of breaking the bank on scorching summer electric bills? Solar energy can bring relief and savings to your wallet.\n\n**Get a Free Quote and Start Saving Today**\n\nTap into the power of the sun and lower your energy costs with our top-notch solar installation services. Financing options available to fit your budget.\n\n**Get Your Free Quote Now**",
+      "score": 4.75,
+      "other": {
+        "score": 3.25,
+        "criteria": {
+          "brand_fit": 3.5,
+          "specificity": 2.5,
+          "claim_safety": 2,
+          "goal_fit": 5
+        },
+        "note": "The biggest weakness is the unverifiable 'Cut Your Energy Bills in Half' headline, which risks a misleading absolute claim and lacks concrete, business-specific details.",
+        "judge_spread": 0.5
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "orbit-hr",
+      "out": "HEADLINE: Streamline Your HR Onboarding Process with Ease\n\nSUBHEAD: Simplify new hire paperwork, automate repetitive tasks, and ensure a seamless transition for your team with our intuitive onboarding software.\n\nCTA: Get a Customized Pricing Quote",
+      "score": 4.75,
+      "other": {
+        "score": 3.125,
+        "criteria": {
+          "brand_fit": 3.5,
+          "specificity": 2,
+          "claim_safety": 3,
+          "goal_fit": 4
+        },
+        "note": "The copy is generic and could apply to any onboarding software, lacking concrete details tied to mid-size HR teams.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "fern-vet",
+      "out": "Here is the rewritten landing page hero copy:\n\n**Your Neighborhood Vets, When You Need Us Most**\n\n**Convenient evening hours for a healthier pet**\n\nNo more taking time off work or juggling busy schedules. Our clinic is open late, so you can bring your furry friend in when it's most convenient for you. Our experienced and caring team is here to provide the best possible care for your dog or cat.\n\n**Book an appointment tonight**",
+      "score": 5,
+      "other": {
+        "score": 4,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 3,
+          "claim_safety": 3,
+          "goal_fit": 5
+        },
+        "note": "The biggest weakness is the phrase 'best possible care,' which is an unverifiable absolute claim.",
+        "judge_spread": 0.5
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "quill-edu",
+      "out": "Here is a possible landing page hero copy:\n\n**Start Your Writing Journey Today**\n\n**Take the first step towards becoming a confident writer**\n\n**Enroll Now**\n\nIs fear of not knowing where to start holding you back from sharing your stories, ideas, and thoughts with the world? Our online writing course is designed specifically for adult beginners like you, providing a supportive and structured environment to help you build the writing habit and develop your skills.\n\nDon't let self-doubt or uncertainty hold you back any longer. Join our upcoming cohort and discover a community of like-minded individuals who are eager to start their writing journey. Our expert instructors will guide you through the fundamentals of writing, helping you overcome common obstacles and achieving your writing goals.\n\n**Enroll Now",
+      "score": 5,
+      "other": {
+        "score": 3.875,
+        "criteria": {
+          "brand_fit": 4.5,
+          "specificity": 2,
+          "claim_safety": 4,
+          "goal_fit": 5
+        },
+        "note": "The copy is too generic and lacks concrete course details, so it could apply to almost any writing course.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "mason-solar",
+      "out": "HEADLINE: Slash Your Summer Electric Bills with Solar Power\n\nSUBHEAD: Get a personalized solar panel installation quote and start saving money on your energy bills today\n\nCTA: Get Your Free Solar Quote Now",
+      "score": 4.75,
+      "other": {
+        "score": 4.125,
+        "criteria": {
+          "brand_fit": 4.5,
+          "specificity": 3,
+          "claim_safety": 4,
+          "goal_fit": 5
+        },
+        "note": "The copy is generic and omits the financing availability detail, so it could be pasted onto any solar installer.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "orbit-hr",
+      "out": "Here is a possible landing page hero copy:\n\n**Simplify Your HR Workflow with Ease**\n\nStreamline your onboarding process and reduce administrative burdens with our intuitive software designed specifically for HR teams at mid-size companies.\n\n**Say Goodbye to Manual Data Entry and Long Onboarding Times**\n\nOur software automates and integrates all your onboarding tasks, ensuring a seamless experience for new hires and reduced administrative workload for your team.\n\n**Get Started with Our Pricing Today**",
+      "score": 4.75,
+      "other": {
+        "score": 2.625,
+        "criteria": {
+          "brand_fit": 3,
+          "specificity": 2,
+          "claim_safety": 2.5,
+          "goal_fit": 3
+        },
+        "note": "The biggest weakness is generic, unverifiable language like 'Say Goodbye to Manual Data Entry' and 'all your onboarding tasks' that lacks concrete differentiators and could apply to any onboarding software.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "fern-vet",
+      "out": "Here is a potential landing page hero copy:\n\n**When Your Pet Needs Us Most**\n\nAs a pet owner, you want the best for your furry friend. But sometimes, the best care requires a little extra attention outside of regular business hours. That's why we're here for you.\n\n**Convenient Evening Hours for a Healthier Pet**\n\nOur neighborhood veterinary clinic is open until 7 PM, Monday through Friday, so you can bring your pet in for care after a long day. Our experienced and compassionate team is dedicated to providing top-notch medical care for your dog or cat, whether it's a routine check-up or an unexpected issue that arises.\n\n**Schedule Your Evening Appointment Today**\n\nReady to book a convenient evening appointment? Fill out the form below",
+      "score": 5,
+      "other": {
+        "score": 4.375,
+        "criteria": {
+          "brand_fit": 4.5,
+          "specificity": 4.5,
+          "claim_safety": 4,
+          "goal_fit": 4.5
+        },
+        "note": "The headline is emotionally generic and doesn't mention evening hours or booking, and 'top-notch medical care' is an unverifiable claim.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "quill-edu",
+      "out": "Here is a possible landing-page hero copy:\n\n**Start Writing Today**\n\n**Break Free from the Blank Page and Discover the Joy of Creative Expression**\n\n**Enroll Now in Our Life-Changing Online Writing Course for Adult Beginners**",
+      "score": 4.75,
+      "other": {
+        "score": 3.25,
+        "criteria": {
+          "brand_fit": 4,
+          "specificity": 2,
+          "claim_safety": 3,
+          "goal_fit": 4
+        },
+        "note": "The copy is generic and lacks concrete course or cohort details, while 'life-changing' is an unverifiable claim.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "mason-solar",
+      "out": "Here is the landing page hero copy:\n\n**Cut Your Summer Electricity Bills in Half**\n\n**Say Goodbye to Skyrocketing Energy Costs**\n\nGet a free, no-obligation quote to see how much you can save with solar energy.\n\n**Get Your Free Quote Today**",
+      "score": 4.75,
+      "other": {
+        "score": 3.375,
+        "criteria": {
+          "brand_fit": 4,
+          "specificity": 2.5,
+          "claim_safety": 2,
+          "goal_fit": 5
+        },
+        "note": "The headline makes an unverifiable absolute savings claim (\"Cut Your Summer Electricity Bills in Half\") that could be misleading.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "orbit-hr",
+      "out": "Here is the landing-page hero copy:\n\n**Streamline Your Onboarding Process**\n\n**Simplify New Hire Integration with Our Proven HR Onboarding Platform**\n\n**Get a Customized Pricing Plan for Your Mid-Size Company**",
+      "score": 5,
+      "other": {
+        "score": 3.125,
+        "criteria": {
+          "brand_fit": 3.5,
+          "specificity": 2,
+          "claim_safety": 3,
+          "goal_fit": 4
+        },
+        "note": "The copy is generic and could apply to any onboarding platform, lacking concrete differentiators or details from the brief beyond 'mid-size company'.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "fern-vet",
+      "out": "**Your Neighborhood Veterinary Care, When You Need It Most**\n\n**Convenient Evening Hours for Busy Pet Parents**\n\n**Book Your Appointment Today**",
+      "score": 4.75,
+      "other": {
+        "score": 4.25,
+        "criteria": {
+          "brand_fit": 4.5,
+          "specificity": 2.5,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The biggest weakness is that the copy lacks concrete identifying details, so it could be pasted onto any neighborhood vet with evening hours.",
+        "judge_spread": 0.5
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "quill-edu",
+      "out": "Here's a possible hero copy:\n\n**Welcome to the Page**\n\n**You've Always Wanted to Write. Now's the Time.**\n\n**Join Our Next Cohort and Start Writing Your Story**\n\n(I tried to create a warm and inviting tone that acknowledges the audience's desire to write, while also emphasizing the opportunity to take action and start their writing journey.)",
+      "score": 4.75,
+      "other": {
+        "score": 3.75,
+        "criteria": {
+          "brand_fit": 4,
+          "specificity": 2,
+          "claim_safety": 5,
+          "goal_fit": 4
+        },
+        "note": "The biggest weakness is lack of concrete details about the course, making it generic enough to fit any writing program.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "mason-solar",
+      "out": "Here's a possible hero copy:\n\n**Save Hundreds on Your Summer Bills**\n\n**Cut Your Energy Costs with a Residential Solar Panel System**\n\n**Get a Free, No-Obligation Quote Today**\n\nLet me know if you'd like me to make any changes!",
+      "score": 4.75,
+      "other": {
+        "score": 3.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 2,
+          "claim_safety": 3,
+          "goal_fit": 5
+        },
+        "note": "The biggest weakness is specificity: the copy is generic and could be pasted onto any solar installer, with no mention of financing or a unique differentiator.",
+        "judge_spread": 0.0
+      }
+    }
+  ]
+}

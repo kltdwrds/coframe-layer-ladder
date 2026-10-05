@@ -118,6 +118,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.86em
 .s-retrieved_fewshot { stroke: var(--arm-b); fill: var(--arm-b); }
 .s-prompt_rewrite { stroke: var(--arm-c); fill: var(--arm-c); }
 .series.s-baseline, .series.s-lesson_in_context, .series.s-retrieved_fewshot, .series.s-prompt_rewrite { fill: none; }
+.s-control { fill: var(--ink); opacity: 0.75; }
 .k-good { fill: var(--arm-b); } .k-mediocre { fill: var(--arm-a); } .k-defect { fill: var(--arm-c); }
 .legend { display: flex; flex-wrap: wrap; gap: 0.35em 1.2em; font-size: var(--fs-small); color: var(--graphite); margin: 0 0 0.6em; font-family: var(--display); }
 .legend span { display: inline-flex; align-items: center; gap: 0.45em; }

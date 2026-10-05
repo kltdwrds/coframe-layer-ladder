@@ -1,0 +1,605 @@
+{
+  "system_prompt_example": "You write landing-page hero copy. Output exactly: HEADLINE, SUBHEAD, CTA, each on its own line.\n\nYou will be scored 1-5 on each of these criteria:\n- brand_fit: Tone matches the stated brand voice and suits the audience.\n- specificity: Concrete details from the brief; could not be pasted onto a different business.\n- claim_safety: Makes no unverifiable, absolute, or forbidden claims. 5 = fully safe, 1 = uses a forbidden claim.\n- goal_fit: Headline, subhead and CTA clearly drive the stated goal.\n\nNever make any of these claims: eliminates all paperwork; 100% error free",
+  "rows": [
+    {
+      "rep": 0,
+      "id": "orbit-hr",
+      "out": "Here is the landing-page hero copy:\n\n**Effortless Onboarding for Every New Hire**\n\nStreamline the process with our intuitive software, designed to reduce manual paperwork and ensure seamless integration with your existing HR systems.\n\n**Get Custom Pricing for Your Company**\n\nRequest a demo and our team will work with you to create a tailored solution that meets your unique onboarding needs.",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the benefits of the onboarding software for mid-size companies.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3,
+          "criteria": {
+            "brand_fit": 3,
+            "specificity": 2,
+            "claim_safety": 3,
+            "goal_fit": 4
+          },
+          "note": "The copy relies on generic, unverifiable phrases like 'effortless' and 'seamless' and lacks concrete details about mid-size HR onboarding, weakening specificity and claim safety.",
+          "judge_spread": 0.5
+        }
+      }
+    },
+    {
+      "rep": 0,
+      "id": "fern-vet",
+      "out": "HEADLINE\nYour Neighborhood Vet, When You Need Us\n\nSUBHEAD\nExtended evening hours to fit your busy schedule\n\nCTA\nBook Your Appointment Today & Get a Free Consultation",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the services offered by the veterinary clinic to make it more distinctive and tailored to the audience's needs.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.125,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2.5,
+            "claim_safety": 4,
+            "goal_fit": 5
+          },
+          "note": "The copy is generic and could be pasted onto any neighborhood vet with evening hours, lacking pet-specific or local details.",
+          "judge_spread": 0.25
+        }
+      }
+    },
+    {
+      "rep": 0,
+      "id": "quill-edu",
+      "out": "Here's the hero copy:\n\n**HEADLINE**\nUnlock Your Story: Start Writing with Confidence\n\n**SUBHEAD**\nBegin your writing journey today and discover the joy of creative expression, one word at a time.\n\n**CTA**\nJoin our next cohort and get started with a FREE introductory session - no experience necessary, just your curiosity and a willingness to write.",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about what the online writing course entails, but overall it effectively aligns with the brand voice and goal.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2,
+            "claim_safety": 5,
+            "goal_fit": 4
+          },
+          "note": "The copy is generic and lacks concrete details from the brief (e.g., online, adult beginners), so it could be pasted onto any writing course.",
+          "judge_spread": 0
+        }
+      }
+    },
+    {
+      "rep": 0,
+      "id": "mason-solar",
+      "out": "HEADLINE: Save on Your Summer Bills with Solar\n\nSUBHEAD: Get a free quote from our experienced team to see how solar can reduce your energy costs\n\nCTA: Get Your Free Quote Today",
+      "fmt_ok": true,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the financing options available to better match the brief's details.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.25,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy is generic and omits key brief details like financing availability, so it could be pasted onto any solar installer.",
+          "judge_spread": 0.0
+        }
+      }
+    },
+    {
+      "rep": 1,
+      "id": "orbit-hr",
+      "out": "Here's the landing-page hero copy:\n\n**Streamline Your Onboarding Process with Ease**\n\nSay goodbye to tedious paperwork and hello to a more efficient onboarding experience for your HR team and new hires.\n\n**Get Customized Pricing for Your Business**\n\nTake the first step towards automating your onboarding process and request a personalized quote from our experts today.",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4,
+          "criteria": {
+            "brand_fit": 4,
+            "specificity": 3,
+            "claim_safety": 4,
+            "goal_fit": 5
+          },
+          "note": "The copy comes close to making a forbidden claim with 'Say goodbye to tedious paperwork', which may imply 'eliminates all paperwork'.",
+          "judge_spread": 0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3.25,
+          "criteria": {
+            "brand_fit": 3,
+            "specificity": 2,
+            "claim_safety": 4,
+            "goal_fit": 4
+          },
+          "note": "The copy is generic and lacks concrete details specific to Orbit HR or mid-size HR teams, so it could be pasted onto any onboarding software.",
+          "judge_spread": 0.0
+        }
+      }
+    },
+    {
+      "rep": 1,
+      "id": "fern-vet",
+      "out": "HEADLINE\nA Home Away from Home for Your Pet\n\nSUBHEAD\nGet the personalized care your furry friend deserves, with evening hours to fit your schedule\n\nCTA\nBook Your Appointment Today and Give Your Pet the Attention They Need",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the services offered by the veterinary clinic to make it even more tailored to the audience's needs.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.125,
+          "criteria": {
+            "brand_fit": 4.5,
+            "specificity": 2.5,
+            "claim_safety": 5,
+            "goal_fit": 4.5
+          },
+          "note": "The copy relies on generic pet-care language and could be pasted onto another clinic; only evening hours ties it to the brief.",
+          "judge_spread": 0.75
+        }
+      }
+    },
+    {
+      "rep": 1,
+      "id": "quill-edu",
+      "out": "Here is a possible landing-page hero copy:\n\n**HEADLINE**\nStart Writing, Step by Step\n\n**SUBHEAD**\nBegin your writing journey with our comprehensive online course, designed for adult beginners who want to start writing from scratch.\n\n**CTA**\nJoin the next cohort and discover a supportive community, expert guidance, and the skills to turn your writing dreams into reality.",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 5,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 5,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy is well-crafted, but the biggest weakness is that it may benefit from a bit more emotional resonance to truly motivate the audience to take action.",
+          "judge_spread": 0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.0,
+          "criteria": {
+            "brand_fit": 4.5,
+            "specificity": 2,
+            "claim_safety": 4.5,
+            "goal_fit": 5
+          },
+          "note": "The copy is too generic and could be pasted onto any online writing course, lacking concrete details unique to Quill Edu.",
+          "judge_spread": 0.5
+        }
+      }
+    },
+    {
+      "rep": 1,
+      "id": "mason-solar",
+      "out": "Reduce Your Summer Bills\n\nStay cool and save money this summer without breaking the bank.\n\nGet a personalized quote for your solar panel installation today.",
+      "fmt_ok": true,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the financing options available to better match the brief.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.25,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 3,
+            "claim_safety": 4.5,
+            "goal_fit": 4.5
+          },
+          "note": "The copy omits the financing availability detail and is generic enough to apply to any solar installer.",
+          "judge_spread": 0.0
+        }
+      }
+    },
+    {
+      "rep": 2,
+      "id": "orbit-hr",
+      "out": "Here is a potential landing-page hero copy:\n\n**HEADLINE**\nStreamline Your HR Onboarding Process\n\n**SUBHEAD**\nEffortlessly manage new hires, reduce manual workload, and get new employees ramped up to productivity faster with our intuitive onboarding software.\n\n**CTA**\nGet a Customized Pricing Quote for Your Business",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific to mid-size companies to further tailor the message to the target audience.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3,
+          "criteria": {
+            "brand_fit": 3,
+            "specificity": 2,
+            "claim_safety": 3,
+            "goal_fit": 4
+          },
+          "note": "The copy is generic and lacks concrete details tied to mid-size HR onboarding, so it could be pasted onto any competitor.",
+          "judge_spread": 0
+        }
+      }
+    },
+    {
+      "rep": 2,
+      "id": "fern-vet",
+      "out": "HEADLINE\nCompanion Care for Your Community\n\nSUBHEAD\nYour neighborhood vet with evening hours, because we know life doesn't always follow a 9-to-5 schedule.\n\nCTA\nSchedule Your Appointment Today",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.916666666666667,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4.666666666666667,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the services offered by the veterinary clinic to further tailor it to the audience's needs.",
+          "judge_spread": 0.25
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.375,
+          "criteria": {
+            "brand_fit": 4.5,
+            "specificity": 3.5,
+            "claim_safety": 5,
+            "goal_fit": 4.5
+          },
+          "note": "The headline is generic and could apply to any community-focused pet service, reducing distinctiveness.",
+          "judge_spread": 0.75
+        }
+      }
+    },
+    {
+      "rep": 2,
+      "id": "quill-edu",
+      "out": "Here is the landing-page hero copy:\n\n**HEADLINE**\nUnlock Your Story: Discover the Joy of Writing\n\n**SUBHEAD**\nStart writing with confidence and creativity in our supportive online community. Learn to write with ease and express yourself honestly.\n\n**CTA**\nJoin the Next Cohort and Begin Your Writing Journey Today!",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the course details, such as the topics covered or the level of guidance provided, to make it more distinctive and appealing to the target audience.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3.875,
+          "criteria": {
+            "brand_fit": 4.5,
+            "specificity": 2,
+            "claim_safety": 4.5,
+            "goal_fit": 4.5
+          },
+          "note": "The copy is generic and lacks concrete details from the brief (e.g., adult beginners, never started), so it could be pasted onto any writing course.",
+          "judge_spread": 0.75
+        }
+      }
+    },
+    {
+      "rep": 2,
+      "id": "mason-solar",
+      "out": "Here is the landing-page hero copy:\n\n**HEADLINE**\nReduce Your Summer Electric Bills with Solar Power\n\n**SUBHEAD**\nGet a personalized quote for a solar panel system tailored to your home's unique energy needs\n\n**CTA**\nGet a Free, No-Obligation Quote Today",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the financing options available to better match the brief.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.25,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy omits the financing available detail and is generic enough to be pasted onto any residential solar installer.",
+          "judge_spread": 0.0
+        }
+      }
+    },
+    {
+      "rep": 3,
+      "id": "orbit-hr",
+      "out": "Here is the landing-page hero copy:\n\n**HEADLINE**\nStreamline Your HR Onboarding Process with Ease\n\n**SUBHEAD**\nEffortlessly manage new hire paperwork, automate workflows, and get your team up to speed faster with our intuitive onboarding software.\n\n**CTA**\nGet a Customized Quote for Your Organization",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the benefits of the onboarding software for mid-size companies.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3.125,
+          "criteria": {
+            "brand_fit": 3,
+            "specificity": 2,
+            "claim_safety": 3.5,
+            "goal_fit": 4
+          },
+          "note": "The copy is generic and lacks concrete details from the brief, so it could be pasted onto any onboarding software.",
+          "judge_spread": 0.25
+        }
+      }
+    },
+    {
+      "rep": 3,
+      "id": "fern-vet",
+      "out": "HEADLINE\nWarmth and care when it matters most: extended hours for your furry friends.\n\nSUBHEAD\nAs a neighbor and a pet parent yourself, you want the best for your furry loved ones. That's why we're here, with evening hours to ensure they receive the attention they deserve.\n\nCTA\nBook an appointment for your pet today and give them the care they need, when you need it.",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the unique aspects of the clinic, such as mentioning the neighborhood or specific services offered.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2,
+            "claim_safety": 4,
+            "goal_fit": 5
+          },
+          "note": "The copy lacks concrete veterinary or neighborhood details, so it could be pasted onto almost any pet care business with evening hours.",
+          "judge_spread": 0
+        }
+      }
+    },
+    {
+      "rep": 3,
+      "id": "quill-edu",
+      "out": "Here's a possible landing-page hero copy:\n\nHEADLINE: Discover Your Voice, Start Your Story\n\nSUBHEAD: Learn the fundamentals of writing and unleash your creativity with our supportive online community and expert guidance.\n\nCTA: Join Our Next Cohort and Begin Your Writing Journey Today",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the course details, such as the topics covered or the level of commitment required.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2,
+            "claim_safety": 4,
+            "goal_fit": 5
+          },
+          "note": "The biggest weakness is specificity: the copy lacks concrete details from the brief, such as adult beginners or course format, so it could be pasted onto any writing course.",
+          "judge_spread": 0
+        }
+      }
+    },
+    {
+      "rep": 3,
+      "id": "mason-solar",
+      "out": "HEADLINE: Lower Your Summer Electric Bills with Solar Power\n\nSUBHEAD: Replace expensive grid electricity with clean, renewable energy and start saving on your summer power bills\n\nCTA: Get a personalized solar quote and start reducing your energy costs today",
+      "fmt_ok": true,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific by mentioning financing options to further tailor it to the residential solar installer's brief.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.125,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2,
+            "claim_safety": 4.5,
+            "goal_fit": 5
+          },
+          "note": "The copy is generic and omits the financing available detail, so it could apply to any solar installer.",
+          "judge_spread": 0.25
+        }
+      }
+    },
+    {
+      "rep": 4,
+      "id": "orbit-hr",
+      "out": "Here is the landing-page hero copy:\n\nHEADLINE\nStreamline Your Onboarding Process with Ease\n\nSUBHEAD\nSay goodbye to tedious paperwork, manual checks, and unnecessary administrative tasks \u2013 our onboarding software is designed to simplify the new hire experience for HR teams like yours.\n\nCTA\nGet Customized Pricing for Your Company",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.5,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 4,
+            "goal_fit": 5
+          },
+          "note": "The copy comes close to making a forbidden claim by saying 'say goodbye to tedious paperwork', which may be perceived as implying the elimination of all paperwork.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3.125,
+          "criteria": {
+            "brand_fit": 3,
+            "specificity": 2,
+            "claim_safety": 3,
+            "goal_fit": 4.5
+          },
+          "note": "The biggest weakness is that the copy is generic and lacks mid-size-specific details, so it could be pasted onto any onboarding software.",
+          "judge_spread": 0.25
+        }
+      }
+    },
+    {
+      "rep": 4,
+      "id": "fern-vet",
+      "out": "HEADLINE: Evening Veterinary Care for Your Furry Friends\n\nSUBHEAD: Convenient, compassionate care for dogs and cats when you need it most\n\nCTA: Book a same-day appointment today and let us take care of your pet's evening needs",
+      "fmt_ok": true,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the unique aspects of the clinic, such as mentioning the evening hours explicitly in the subhead or headline.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3.875,
+          "criteria": {
+            "brand_fit": 4,
+            "specificity": 2.5,
+            "claim_safety": 4,
+            "goal_fit": 5
+          },
+          "note": "The copy lacks neighborhood or clinic-specific details, so it could be pasted onto any evening veterinary clinic.",
+          "judge_spread": 0.75
+        }
+      }
+    },
+    {
+      "rep": 4,
+      "id": "quill-edu",
+      "out": "HEADLINE: \nUnlock Your Story: Start Writing with Confidence\n\nSUBHEAD: Discover the foundations of creative writing and transform your thoughts into compelling stories with our beginner-friendly online course.\n\nCTA: Join the next cohort and embark on a 6-week journey to unlock your writing potential.",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about what makes the course unique or tailored to adult beginners, but overall it effectively conveys the encouraging and literate tone.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 4.25,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 2.5,
+            "claim_safety": 4.5,
+            "goal_fit": 5
+          },
+          "note": "The biggest weakness is specificity: the copy could be pasted onto almost any beginner writing course and lacks concrete details from the brief such as adult beginners or unique course features.",
+          "judge_spread": 0.5
+        }
+      }
+    },
+    {
+      "rep": 4,
+      "id": "mason-solar",
+      "out": "Here's a sample landing page hero copy:\n\n**SUNPOWER SOLUTIONS FOR YOUR HOME**\n\n**Reduce Your Summer Bills by Up to 50%**\n\nGet a personalized quote for solar panels tailored to your home's energy needs.\n\n**Get Your Free Quote Now**",
+      "fmt_ok": false,
+      "judges": {
+        "llama-3.3-70b-instruct-fp8-fast": {
+          "score": 4.75,
+          "criteria": {
+            "brand_fit": 5,
+            "specificity": 4,
+            "claim_safety": 5,
+            "goal_fit": 5
+          },
+          "note": "The copy could be more specific about the financing options available to better match the brief.",
+          "judge_spread": 0.0
+        },
+        "deepseek-v4-pro-0813": {
+          "score": 3.875,
+          "criteria": {
+            "brand_fit": 4.5,
+            "specificity": 2.5,
+            "claim_safety": 3.5,
+            "goal_fit": 5
+          },
+          "note": "The biggest weakness is that the copy is generic and omits the financing option, so it could be pasted onto any solar installer.",
+          "judge_spread": 0.25
+        }
+      }
+    }
+  ]
+}

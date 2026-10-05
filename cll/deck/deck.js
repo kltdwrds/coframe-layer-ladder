@@ -7,6 +7,7 @@
   function el(n, a, parent) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; }
   function txt(n, a, s, parent) { var e = el(n, a, parent); e.textContent = s; return e; }
   function f2(x) { return (Math.round(x * 100) / 100).toFixed(2); }
+  function fp(p) { return p < 0.01 ? p.toFixed(3) : p.toFixed(2); }
   function sign(x) { return (x >= 0 ? "+" : "−") + f2(Math.abs(x)); }
 
   // ---------- tooltip ----------
@@ -106,26 +107,28 @@
   function gainChart(box, runs) {
     var W = 640, rowH = 30, L = 170, R = 70, T = 20, gap = 26;
     var blocks = runs.filter(function (r) { return r.run; });
-    var H = T + blocks.length * (ORDER.length * rowH + gap) + 24, pw = W - L - R;
-    var ext = 0.1; blocks.forEach(function (b) { ORDER.forEach(function (k) { var s = b.run.layers[k]; if (s) ext = Math.max(ext, Math.abs(s.lift)); }); ext = Math.max(ext, b.run.mde80); });
+    var ROWS = ORDER.concat(D.control ? ["control"] : []);
+    var H = T + blocks.length * (ROWS.length * rowH + gap) + 24, pw = W - L - R;
+    function rowData(b, k) { if (k !== "control") return b.run.layers[k]; var c = D.control[b.tag]; return c && { lift: c.lift, p: c.p, post_mean: c.mean, learn_usd: 0, is_null: false }; }
+    var ext = 0.1; blocks.forEach(function (b) { ROWS.forEach(function (k) { var s = rowData(b, k); if (s) ext = Math.max(ext, Math.abs(s.lift)); }); ext = Math.max(ext, b.run.mde80); });
     ext = Math.ceil(ext * 10) / 10;
     var x = function (v) { return L + pw * (v + ext) / (2 * ext); };
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Final held-out gain over the pooled base-prompt mean, per layer, for each judge, with the noise range." }, box);
     var tip = tipFor(box), y0 = T;
     blocks.forEach(function (b) {
-      var top = y0, bot = y0 + ORDER.length * rowH;
+      var top = y0, bot = y0 + ROWS.length * rowH;
       txt("text", { x: 0, y: top - 6, "class": "lbl muted" }, "Judge: " + b.run.judge.replace("-instruct-fp8-fast", "").replace("-0813", ""), svg);
       el("rect", { x: x(-b.run.mde80), width: x(b.run.mde80) - x(-b.run.mde80), y: top, height: bot - top, "class": "band anim-fade" }, svg);
       el("line", { x1: x(0), x2: x(0), y1: top, y2: bot, "class": "axis" }, svg);
-      ORDER.forEach(function (k, i) {
-        var s = b.run.layers[k]; if (!s) return;
+      ROWS.forEach(function (k, i) {
+        var s = rowData(b, k); if (!s) return;
         var cy = top + i * rowH + rowH / 2;
-        txt("text", { x: L - 12, y: cy + 4, "text-anchor": "end", "class": "lbl" }, NAMES[k], svg);
+        txt("text", { x: L - 12, y: cy + 4, "text-anchor": "end", "class": "lbl" + (k === "control" ? " muted" : "") }, k === "control" ? "Rubric in prompt (static)" : NAMES[k], svg);
         var x1 = Math.min(x(0), x(s.lift)), w = Math.abs(x(s.lift) - x(0));
-        var r = el("rect", { x: x1, y: cy - 7, width: Math.max(2, w), height: 14, rx: 3, "class": "s-" + k + " anim-fade" }, svg);
-        txt("text", { x: (s.lift >= 0 ? x(s.lift) + 6 : x(s.lift) - 6), y: cy + 4, "text-anchor": s.lift >= 0 ? "start" : "end", "class": "lbl" }, sign(s.lift) + (s.p != null ? "  p=" + s.p.toFixed(2) : s.is_null ? "  (base prompt)" : ""), svg);
+        var r = el("rect", { x: x1, y: cy - 7, width: Math.max(2, w), height: 14, rx: 3, "class": (k === "control" ? "s-control" : "s-" + k) + " anim-fade" }, svg);
+        txt("text", { x: (s.lift >= 0 ? x(s.lift) + 6 : x(s.lift) - 6), y: cy + 4, "text-anchor": s.lift >= 0 ? "start" : "end", "class": "lbl" }, sign(s.lift) + (s.p != null ? "  p=" + fp(s.p) : s.is_null ? "  (base prompt)" : ""), svg);
         var hit = el("rect", { x: L, y: cy - rowH / 2, width: pw, height: rowH, fill: "transparent" }, svg);
-        hit.addEventListener("mousemove", function (e) { tip.show("<b>" + NAMES[k] + "</b><br><span class=k>mean held-out, iters 1–4</span> " + f2(s.post_mean) + " · <span class=k>lift</span> " + sign(s.lift) + (s.p != null ? " · <span class=k>p</span> " + s.p.toFixed(3) : "") + "<br><span class=k>learning cost</span> $" + s.learn_usd.toFixed(4) + (s.accepted != null ? "<br><span class=k>rewrites accepted</span> " + s.accepted + " of " + (s.accepted + s.rejected) : ""), e); });
+        hit.addEventListener("mousemove", function (e) { tip.show("<b>" + (k === "control" ? "Rubric + forbidden claims in the prompt (no learning)" : NAMES[k]) + "</b><br><span class=k>mean held-out, iters 1–4</span> " + f2(s.post_mean) + " · <span class=k>lift</span> " + sign(s.lift) + (s.p != null ? " · <span class=k>p</span> " + s.p.toFixed(3) : "") + "<br><span class=k>learning cost</span> $" + s.learn_usd.toFixed(4) + (s.accepted != null ? "<br><span class=k>rewrites accepted</span> " + s.accepted + " of " + (s.accepted + s.rejected) : ""), e); });
         hit.addEventListener("mouseleave", tip.hide);
       });
       y0 = bot + gap + 14;
@@ -162,6 +165,33 @@
     box.insertBefore(lg, box.firstChild);
   }
 
+  function crossChart(box, c) {
+    if (!c) return;
+    var W = 460, H = 380, L = 46, R = 16, T = 12, B = 44, lo = 2, hi = 5, pw = W - L - R, ph = H - T - B;
+    var x = function (v) { return L + pw * (v - lo) / (hi - lo); }, y = function (v) { return T + ph * (hi - v) / (hi - lo); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "The same 32 held-out outputs scored by both judges: the 70B along x, DeepSeek along y." }, box);
+    [2, 3, 4, 5].forEach(function (v) {
+      el("line", { x1: x(v), x2: x(v), y1: T, y2: T + ph, "class": "grid" }, svg); el("line", { x1: L, x2: L + pw, y1: y(v), y2: y(v), "class": "grid" }, svg);
+      txt("text", { x: x(v), y: T + ph + 18, "text-anchor": "middle", "class": "tick" }, v, svg);
+      txt("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end", "class": "tick" }, v, svg);
+    });
+    el("line", { x1: x(lo), y1: y(lo), x2: x(hi), y2: y(hi), stroke: "var(--graphite)", "stroke-dasharray": "4 4" }, svg);
+    txt("text", { x: L + pw / 2, y: H - 6, "text-anchor": "middle", "class": "axis-title" }, "llama-3.3-70b score", svg);
+    txt("text", { x: 12, y: T + ph / 2, "text-anchor": "middle", "class": "axis-title", transform: "rotate(-90 12 " + (T + ph / 2) + ")" }, "deepseek-v4-pro score", svg);
+    var tip = tipFor(box);
+    c.points.forEach(function (p, i) {
+      var jx = ((i * 7) % 5 - 2) * 0.012;  // tiny deterministic jitter: the 70B's scores pile up on a few values
+      el("circle", { cx: x(p.j70 + jx), cy: y(p.jds), r: 5.5, "class": "dot anim-fade " + (p.run === "run1" ? "k-mediocre" : "k-good") }, svg);
+      var hit = el("circle", { cx: x(p.j70 + jx), cy: y(p.jds), r: 10, fill: "transparent" }, svg);
+      hit.addEventListener("mousemove", function (e) { tip.show("<b>" + (p.run === "run1" ? "Run 1 output" : "Run 2 output") + "</b> · " + NAMES[p.layer] + "<br>" + p.id + "<br><span class=k>70B</span> " + f2(p.j70) + " · <span class=k>DeepSeek</span> " + f2(p.jds), e); });
+      hit.addEventListener("mouseleave", tip.hide);
+    });
+    var lg = document.createElement("div"); lg.className = "legend";
+    lg.innerHTML = '<span><i class="dot" style="background:var(--arm-a)"></i>run 1 outputs</span><span><i class="dot" style="background:var(--arm-b)"></i>run 2 outputs</span>';
+    box.insertBefore(lg, box.firstChild);
+    dataTable(box, ["run", "layer", "brief", "70B", "DeepSeek"], c.points.map(function (p) { return [p.run, NAMES[p.layer], p.id, f2(p.j70), f2(p.jds)]; }));
+  }
+
   function dataTable(box, head, rows) {
     var d = document.createElement("details"); d.className = "data";
     d.innerHTML = "<summary>Data</summary><table><tr>" + head.map(function (h) { return "<th>" + h + "</th>"; }).join("") + "</tr>" +
@@ -175,7 +205,7 @@
       var parts = n.dataset.k.split("|"), v = parts[0].split(".").reduce(function (o, k) { return o == null ? o : o[k]; }, D);
       if (v == null) { n.textContent = n.dataset.pending || "…"; n.classList.add("muted"); return; }
       var fmt = parts[1];
-      n.textContent = fmt === "sign" ? sign(v) : fmt === "usd" ? "$" + Number(v).toFixed(2) : fmt === "usd4" ? "$" + Number(v).toFixed(4) : fmt === "int" ? String(v) : typeof v === "number" ? f2(v) : v;
+      n.textContent = /\.p$/.test(parts[0]) && typeof v === "number" ? fp(v) : fmt === "sign" ? sign(v) : fmt === "usd" ? "$" + Number(v).toFixed(2) : fmt === "usd4" ? "$" + Number(v).toFixed(4) : fmt === "int" ? String(v) : typeof v === "number" ? f2(v) : v;
     });
     document.querySelectorAll("[data-if]").forEach(function (n) {
       var v = n.dataset.if.split(".").reduce(function (o, k) { return o == null ? o : o[k]; }, D);
@@ -214,7 +244,8 @@
       else if (t === "line2") { if (D.run2) lineChart(box, D.run2); else box.innerHTML = '<div class="pending">Run 2 in progress.</div>'; }
       else if (t === "strip") stripChart(box, D.calib);
       else if (t === "strip-title") stripChart(box, (D.calib || []).filter(function (m) { return /70b|deepseek/.test(m.name); }), true);
-      else if (t === "gain") gainChart(box, [{ run: D.run1 }, { run: D.run2 }]);
+      else if (t === "gain") gainChart(box, [{ run: D.run1, tag: "j70" }, { run: D.run2, tag: "jds" }]);
+      else if (t === "cross") crossChart(box, D.cross);
       else if (t === "scatter") scatter(box, D.agree);
     });
     bind();

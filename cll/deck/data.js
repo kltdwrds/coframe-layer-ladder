@@ -164,13 +164,20 @@ window.DATA={
    3.75,
    3.75,
    3.844,
-   3.531
+   3.812,
+   3.844,
+   3.312,
+   3.531,
+   3.75,
+   3.469,
+   3.375,
+   3.656
   ],
-  "lo": 3.5,
+  "lo": 3.312,
   "hi": 3.844,
-  "mu": 3.688,
-  "sd": 0.138,
-  "mde80": 0.25,
+  "mu": 3.642,
+  "sd": 0.182,
+  "mde80": 0.292,
   "layers": {
    "baseline": {
     "heldout": [
@@ -188,7 +195,7 @@ window.DATA={
      3.547
     ],
     "post_mean": 3.773,
-    "lift": 0.086,
+    "lift": 0.132,
     "p": null,
     "is_null": true,
     "final": 3.844,
@@ -212,18 +219,74 @@ window.DATA={
      3.906
     ],
     "post_mean": 3.664,
-    "lift": -0.023,
-    "p": 0.616,
+    "lift": 0.022,
+    "p": 0.45,
     "is_null": false,
     "final": 3.844,
     "learn_usd": 0.0,
     "total_usd": 0.572,
     "tokens": 199346
+   },
+   "prompt_rewrite": {
+    "heldout": [
+     3.75,
+     3.375,
+     3.656,
+     4.0,
+     3.812
+    ],
+    "train": [
+     3.75,
+     3.797,
+     3.516,
+     3.938,
+     3.938
+    ],
+    "post_mean": 3.711,
+    "lift": 0.069,
+    "p": 0.292,
+    "is_null": false,
+    "final": 3.812,
+    "learn_usd": 0.326,
+    "total_usd": 1.013,
+    "tokens": 329939,
+    "accepted": 1,
+    "rejected": 3,
+    "margins": [
+     -0.297,
+     -0.547,
+     0.375,
+     -0.25
+    ]
+   },
+   "retrieved_fewshot": {
+    "heldout": [
+     3.469,
+     3.5,
+     3.875,
+     3.812,
+     3.438
+    ],
+    "train": [
+     3.719,
+     3.844,
+     3.969,
+     3.797,
+     3.781
+    ],
+    "post_mean": 3.656,
+    "lift": 0.014,
+    "p": 0.465,
+    "is_null": false,
+    "final": 3.438,
+    "learn_usd": 0.0,
+    "total_usd": 0.638,
+    "tokens": 214147
    }
   },
-  "format_bad": 7,
-  "format_n": 8,
-  "format_bad_mean": 3.75,
+  "format_bad": 15,
+  "format_n": 16,
+  "format_bad_mean": 3.683,
   "criteria_values": {
    "brand_fit": [
     3,
@@ -232,6 +295,7 @@ window.DATA={
     5
    ],
    "specificity": [
+    1.5,
     2,
     2.5,
     3,
@@ -239,20 +303,23 @@ window.DATA={
    ],
    "claim_safety": [
     2,
+    2.5,
     3,
     3.5,
     4,
+    4.5,
     5
    ],
    "goal_fit": [
+    3.5,
     4,
     4.5,
     5
    ]
   },
-  "total_usd": 1.134,
-  "calls": 364,
-  "bank_adds": 0
+  "total_usd": 2.897,
+  "calls": 861,
+  "bank_adds": 4
  },
  "calib": [
   {
@@ -514,5 +581,308 @@ window.DATA={
  "agree": null,
  "calib_usd": 0.321,
  "aborted_usd": 0.19,
- "cost_total": 1.86
+ "cross": {
+  "points": [
+   {
+    "run": "run1",
+    "layer": "baseline",
+    "id": "orbit-hr",
+    "j70": 4.75,
+    "jds": 2.625
+   },
+   {
+    "run": "run1",
+    "layer": "baseline",
+    "id": "fern-vet",
+    "j70": 4.75,
+    "jds": 4.0
+   },
+   {
+    "run": "run1",
+    "layer": "baseline",
+    "id": "quill-edu",
+    "j70": 4.5,
+    "jds": 3.625
+   },
+   {
+    "run": "run1",
+    "layer": "baseline",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 3.25
+   },
+   {
+    "run": "run1",
+    "layer": "lesson_in_context",
+    "id": "orbit-hr",
+    "j70": 4.75,
+    "jds": 3.125
+   },
+   {
+    "run": "run1",
+    "layer": "lesson_in_context",
+    "id": "fern-vet",
+    "j70": 5,
+    "jds": 4
+   },
+   {
+    "run": "run1",
+    "layer": "lesson_in_context",
+    "id": "quill-edu",
+    "j70": 5,
+    "jds": 3.875
+   },
+   {
+    "run": "run1",
+    "layer": "lesson_in_context",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 4.125
+   },
+   {
+    "run": "run1",
+    "layer": "prompt_rewrite",
+    "id": "orbit-hr",
+    "j70": 4.75,
+    "jds": 2.625
+   },
+   {
+    "run": "run1",
+    "layer": "prompt_rewrite",
+    "id": "fern-vet",
+    "j70": 5,
+    "jds": 4.375
+   },
+   {
+    "run": "run1",
+    "layer": "prompt_rewrite",
+    "id": "quill-edu",
+    "j70": 4.75,
+    "jds": 3.25
+   },
+   {
+    "run": "run1",
+    "layer": "prompt_rewrite",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 3.375
+   },
+   {
+    "run": "run1",
+    "layer": "retrieved_fewshot",
+    "id": "orbit-hr",
+    "j70": 5,
+    "jds": 3.125
+   },
+   {
+    "run": "run1",
+    "layer": "retrieved_fewshot",
+    "id": "fern-vet",
+    "j70": 4.75,
+    "jds": 4.25
+   },
+   {
+    "run": "run1",
+    "layer": "retrieved_fewshot",
+    "id": "quill-edu",
+    "j70": 4.75,
+    "jds": 3.75
+   },
+   {
+    "run": "run1",
+    "layer": "retrieved_fewshot",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 3.75
+   },
+   {
+    "run": "run2",
+    "layer": "baseline",
+    "id": "orbit-hr",
+    "j70": 4.75,
+    "jds": 3.125
+   },
+   {
+    "run": "run2",
+    "layer": "baseline",
+    "id": "fern-vet",
+    "j70": 4.75,
+    "jds": 4.625
+   },
+   {
+    "run": "run2",
+    "layer": "baseline",
+    "id": "quill-edu",
+    "j70": 4.75,
+    "jds": 4
+   },
+   {
+    "run": "run2",
+    "layer": "baseline",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 3.625
+   },
+   {
+    "run": "run2",
+    "layer": "lesson_in_context",
+    "id": "orbit-hr",
+    "j70": 4.75,
+    "jds": 3.125
+   },
+   {
+    "run": "run2",
+    "layer": "lesson_in_context",
+    "id": "fern-vet",
+    "j70": 4.75,
+    "jds": 3.375
+   },
+   {
+    "run": "run2",
+    "layer": "lesson_in_context",
+    "id": "quill-edu",
+    "j70": 4.75,
+    "jds": 4.375
+   },
+   {
+    "run": "run2",
+    "layer": "lesson_in_context",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 4.5
+   },
+   {
+    "run": "run2",
+    "layer": "prompt_rewrite",
+    "id": "orbit-hr",
+    "j70": 5,
+    "jds": 3.25
+   },
+   {
+    "run": "run2",
+    "layer": "prompt_rewrite",
+    "id": "fern-vet",
+    "j70": 5,
+    "jds": 4.25
+   },
+   {
+    "run": "run2",
+    "layer": "prompt_rewrite",
+    "id": "quill-edu",
+    "j70": 4.75,
+    "jds": 3.75
+   },
+   {
+    "run": "run2",
+    "layer": "prompt_rewrite",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 4.0
+   },
+   {
+    "run": "run2",
+    "layer": "retrieved_fewshot",
+    "id": "orbit-hr",
+    "j70": 4.417,
+    "jds": 2.875
+   },
+   {
+    "run": "run2",
+    "layer": "retrieved_fewshot",
+    "id": "fern-vet",
+    "j70": 4.75,
+    "jds": 3.375
+   },
+   {
+    "run": "run2",
+    "layer": "retrieved_fewshot",
+    "id": "quill-edu",
+    "j70": 4.667,
+    "jds": 4
+   },
+   {
+    "run": "run2",
+    "layer": "retrieved_fewshot",
+    "id": "mason-solar",
+    "j70": 4.75,
+    "jds": 3.5
+   }
+  ],
+  "rho_all": 0.16,
+  "rho": {
+   "run1": 0.26,
+   "run2": 0.16
+  },
+  "sd70": 0.13,
+  "sdds": 0.53,
+  "layer_means": {
+   "run1": {
+    "retrieved_fewshot": {
+     "j70": 4.81,
+     "jds": 3.72
+    },
+    "lesson_in_context": {
+     "j70": 4.88,
+     "jds": 3.78
+    },
+    "baseline": {
+     "j70": 4.69,
+     "jds": 3.38
+    },
+    "prompt_rewrite": {
+     "j70": 4.81,
+     "jds": 3.41
+    }
+   },
+   "run2": {
+    "retrieved_fewshot": {
+     "j70": 4.65,
+     "jds": 3.44
+    },
+    "lesson_in_context": {
+     "j70": 4.75,
+     "jds": 3.84
+    },
+    "baseline": {
+     "j70": 4.75,
+     "jds": 3.84
+    },
+    "prompt_rewrite": {
+     "j70": 4.88,
+     "jds": 3.81
+    }
+   }
+  }
+ },
+ "control": {
+  "n_runs": 5,
+  "format_ok": 4,
+  "n": 20,
+  "j70": {
+   "mean": 4.721,
+   "base_mu": 4.651,
+   "lift": 0.069,
+   "p": 0.306,
+   "criteria": {
+    "brand_fit": 4.95,
+    "specificity": 4.03,
+    "claim_safety": 4.9,
+    "goal_fit": 5
+   }
+  },
+  "jds": {
+   "mean": 3.844,
+   "base_mu": 3.642,
+   "lift": 0.202,
+   "p": 0.004,
+   "criteria": {
+    "brand_fit": 4.33,
+    "specificity": 2.25,
+    "claim_safety": 4.17,
+    "goal_fit": 4.62
+   }
+  }
+ },
+ "addons_usd": 0.36,
+ "cost_total": 3.99
 };

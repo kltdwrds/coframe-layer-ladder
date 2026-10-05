@@ -18,7 +18,7 @@
 <section class="slide title-slide" aria-roledescription="slide" aria-label="1: Title">
   <div>
     <h1>The judge, not the layer, decided the result</h1>
-    <p class="subtitle">A one-night run of the cheapest-layer ladder: three places to store a lesson, two judges. The only layer effect we found did not survive a change of judge.</p>
+    <p class="subtitle">A one-night run of the cheapest-layer ladder: three places to store a lesson, two judges. No learned layer beat a one-line prompt change, and the two judges barely agreed on which output was better.</p>
     <p class="byline">Kyle, for Coframe, October 2026 · companion to <a href="https://qyvr.dev/@kyle/coframe-harness-notes" target="_blank" rel="noopener">Learn where labels are cheap</a></p>
   </div>
   <figure class="chart-box" style="margin:0">
@@ -39,8 +39,8 @@
     </ul>
     <div class="stats">
       <div class="stat"><strong>3 layers + baseline</strong>4 learning iterations each, scored on train and held-out after every one</div>
-      <div class="stat"><strong>2 full runs</strong>Same generator and code; only the judge changes</div>
-      <div class="stat"><strong><span data-k="cost_total|usd" data-pending="under $4"></span> total</strong>Run 1 <span data-k="run1.total_usd|usd"></span>, run 2 <span data-k="run2.total_usd|usd" data-pending="(running)"></span>, judge calibration <span data-k="calib_usd|usd"></span>, one aborted attempt <span data-k="aborted_usd|usd"></span></div>
+      <div class="stat"><strong>2 full runs + 2 controls</strong>Same generator and code; only the judge changes. Controls: a static rubric-in-prompt baseline, and cross-judging every final output</div>
+      <div class="stat"><strong><span data-k="cost_total|usd" data-pending="under $4"></span> total</strong>Run 1 <span data-k="run1.total_usd|usd"></span>, run 2 <span data-k="run2.total_usd|usd" data-pending="(running)"></span>, calibration <span data-k="calib_usd|usd"></span>, controls <span data-k="addons_usd|usd"></span>, one aborted attempt <span data-k="aborted_usd|usd"></span></div>
     </div>
   </div>
   <p class="foot">Code and every artifact: <code>cll/</code> in the repo. Run 1: <span data-k="run1.calls|int"></span> model calls, all successful; the AI Gateway log (which also holds the calibration calls) joins back to every one. Scale is small on purpose: this design can only detect a lift of about <span data-k="run1.mde80"></span>–<span data-k="run2.mde80"></span> points.</p>
@@ -118,20 +118,35 @@
 </section>
 
 <!-- 7 -->
-<section class="slide" aria-roledescription="slide" aria-label="7: A lift that did not survive a change of judge">
-  <h2>The one lift we saw did not survive a change of judge</h2>
+<section class="slide" aria-roledescription="slide" aria-label="7: No learned layer beat a one-line prompt change">
+  <h2>No learned layer beat a one-line prompt change</h2>
   <div class="cols chart-right">
     <ul class="points">
-      <li>Under the 70B, lessons in context scored <span data-k="run1.layers.lesson_in_context.lift|sign"></span> over the base prompt (p ≈ <span data-k="run1.layers.lesson_in_context.p"></span>). Under DeepSeek, <span data-k="run2.layers.lesson_in_context.lift|sign"></span> (p ≈ <span data-k="run2.layers.lesson_in_context.p"></span>).</li>
-      <li>The lessons were distilled from the 70B’s own notes. So either the run-1 lift was noise (p is a screen, and three layers were tested), or it was a preference for the judge that wrote the feedback. Neither one is better copy. The second is the small-scale version of reward-model over-optimisation (Gao et al. 2022).</li>
-      <li>Swapping the judge moved every score by about a point, several times larger than any layer effect.</li>
+      <li>Control: the base prompt plus the rubric and the brief’s forbidden claims. No learning, run 5 times on held-out, scored by both judges.</li>
+      <li>Under DeepSeek it scored <span data-k="control.jds.lift|sign"></span> over the base prompt (p ≈ <span data-k="control.jds.p"></span>). The learned layers managed <span data-k="run2.layers.retrieved_fewshot.lift|sign"></span> to <span data-k="run2.layers.prompt_rewrite.lift|sign"></span>.</li>
+      <li>Under the 70B, nothing separates from noise, the control included. Lessons looked like <span data-k="run1.layers.lesson_in_context.lift|sign"></span> in run 1 but did not replicate in run 2.</li>
+      <li>The loop spent its iterations rediscovering what the spec already said. The cheapest layer is the spec.</li>
     </ul>
     <figure class="chart-box" style="margin:0">
-      <p class="chart-sub">Lift over the base-prompt mean, iterations 1–4. Grey: smaller than this design can reliably detect (80% power).</p>
+      <p class="chart-sub">Lift over the base-prompt mean (layers: iterations 1–4). Grey: smaller than this design can reliably detect (80% power).</p>
       <div data-chart="gain"></div>
     </figure>
   </div>
-  <p class="foot">p is a one-sided permutation against all base-prompt runs, used as a screen: 4 held-out briefs, one generation each per iteration. Learning cost excludes the inference tax: lessons make every future generation prompt 3.6× longer (273 vs 75 tokens) and few-shot examples 2.8×.</p>
+  <p class="foot">p is a one-sided permutation against all base-prompt runs for that judge, used as a screen: 4 held-out briefs, one generation each per run. Learning cost excludes the inference tax: lessons make every future generation prompt 3.6× longer (273 vs 75 tokens), few-shot examples 2.8×. The control’s prompt is longer too, but fixed.</p>
+</section>
+
+<!-- 7b -->
+<section class="slide" aria-roledescription="slide" aria-label="8: Same outputs, two judges">
+  <h2>Same outputs, two judges: they barely agree on which is better</h2>
+  <div class="cols chart-right">
+    <ul class="points">
+      <li>Every final held-out output from both runs (<span data-k="cross.points.length|int"></span>) scored by both judges.</li>
+      <li>Rank agreement per output: Spearman <span data-k="cross.rho.run1"></span> on run 1’s outputs, <span data-k="cross.rho.run2"></span> on run 2’s. The 70B’s scores have a spread of <span data-k="cross.sd70"></span>, DeepSeek’s <span data-k="cross.sdds"></span>.</li>
+      <li>Run 1’s lesson outputs also score above that run’s base-prompt outputs under DeepSeek (<span data-k="cross.layer_means.run1.lesson_in_context.jds"></span> vs <span data-k="cross.layer_means.run1.baseline.jds"></span>). With 4 briefs and one draw each, we cannot tell a small real effect from noise, so we don’t claim one.</li>
+    </ul>
+    <figure class="chart-box" style="margin:0"><div data-chart="cross"></div></figure>
+  </div>
+  <p class="foot">For a bandit, the judge’s job is to order variants near the top. Two judges that each order the planted calibration items perfectly can still disagree on real, mid-quality outputs. That is where an ideation loop actually operates.</p>
 </section>
 
 <!-- 8 -->
@@ -165,7 +180,8 @@
   <div class="route">
     <div class="lesson">A judge can be right about order and useless near the top</div><div class="to">→</div><div class="home idea">Measure resolution where variants actually sit, not average agreement</div>
     <div class="lesson">A lift appeared under one judge only</div><div class="to">→</div><div class="home idea">Evaluate with a different judge from the one that gives feedback</div>
-    <div class="lesson">Repeats at temperature 0 were near copies</div><div class="to">→</div><div class="home idea">Spend calls on more generations and briefs, or a cross-family panel (Verga et al. 2024)</div>
+    <div class="lesson">A one-line spec beat every learned layer</div><div class="to">→</div><div class="home idea">Put known constraints in the prompt or in code before asking a loop to learn them</div>
+    <div class="lesson">Judge repeats explained ~15% of variance</div><div class="to">→</div><div class="home idea">Spend calls on more generations, briefs, or a cross-family panel (Verga et al. 2024)</div>
     <div class="lesson">Format and banned claims slipped past a rubric judge</div><div class="to">→</div><div class="home idea">Check hard constraints in code before any judge or traffic</div>
   </div>
   <p class="foot">All of this is the first deck’s thesis, that the evaluator caps the loop, at its smallest scale. Do not read a layer ranking from it; the ranking flipped with the judge.</p>
@@ -205,7 +221,7 @@
 </main>
 <nav class="controls" aria-label="Slide navigation">
   <button type="button" id="prev" aria-label="Previous slide">Back</button>
-  <span id="count" aria-live="polite">1 of 12</span>
+  <span id="count" aria-live="polite">1 of 13</span>
   <button type="button" id="next" aria-label="Next slide">Next</button>
 </nav>
 <script src="data.js"></script>

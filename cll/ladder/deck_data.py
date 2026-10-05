@@ -31,6 +31,9 @@ def agree(d):
     for r in rows:
         kk=key[r["row"]]; j={main:kk["judge_score"]}
         j.update({m.split("/")[-1]:v["judge_score"] for m,v in kk.get("other_judges",{}).items()})
+        if os.path.exists(f"{d}/crossjudge.json"):
+            C=json.load(open(f"{d}/crossjudge.json")); by={(c["id"],c["out"]):c["other"]["score"] for c in C["rows"]}
+            j[C["model"].split("/")[-1]]=round(by[(r["id"],r["output"])],2)
         pts.append({"row":r["row"],"layer":kk["layer"],"hand":float(r["hand_score"]),"judges":j,"comment":r["comment"]})
     return pts
 def calib_usd(p="results_70b/gateway_trace.jsonl"):
@@ -43,9 +46,40 @@ def calib_usd(p="results_70b/gateway_trace.jsonl"):
         if m.get("layer")=="calibrate":
             pi,po=PRICE.get(e["model"],(1.4,4.4)); t+=((e.get("tokens_in") or 0)*pi+(e.get("tokens_out") or 0)*po)/1e6
     return round(t,3)
+def crossjudge():
+    pts=[]
+    for d in ("results_70b","results"):
+        if not os.path.exists(f"{d}/crossjudge.json"): continue
+        C=json.load(open(f"{d}/crossjudge.json")); own=json.load(open(f"{d}/history.json"))["judge_model"].split("/")[-1]
+        for r in C["rows"]:
+            sc={own:r["score"],C["model"].split("/")[-1]:r["other"]["score"]}
+            pts.append({"run":"run1" if d=="results_70b" else "run2","layer":r["layer"],"id":r["id"],
+                        "j70":round(sc["llama-3.3-70b-instruct-fp8-fast"],3),"jds":round(sc["deepseek-v4-pro-0813"],3)})
+    if not pts: return None
+    def rank(a): s=sorted(a); return [s.index(x)+(a.count(x)-1)/2 for x in a]
+    def rho(a,b):
+        ra,rb=rank(a),rank(b); ma,mb=statistics.mean(ra),statistics.mean(rb)
+        c=sum((x-ma)*(y-mb) for x,y in zip(ra,rb)); d=(sum((x-ma)**2 for x in ra)*sum((y-mb)**2 for y in rb))**.5
+        return round(c/d,2) if d else None
+    by={k:[p for p in pts if p["run"]==k] for k in ("run1","run2")}
+    return {"points":pts,"rho_all":rho([p["j70"] for p in pts],[p["jds"] for p in pts]),
+            "rho":{k:rho([p["j70"] for p in v],[p["jds"] for p in v]) for k,v in by.items() if v},
+            "sd70":round(statistics.pstdev(p["j70"] for p in pts),2),"sdds":round(statistics.pstdev(p["jds"] for p in pts),2),
+            "layer_means":{k:{L:{"j70":round(statistics.mean(p["j70"] for p in v if p["layer"]==L),2),"jds":round(statistics.mean(p["jds"] for p in v if p["layer"]==L),2)}
+                              for L in {p["layer"] for p in v}} for k,v in by.items() if v}}
+def control():
+    p="results_control/control.json"
+    if not os.path.exists(p): return None
+    from .stats import summary, perm_p
+    C=json.load(open(p))["rows"]; reps=sorted({r["rep"] for r in C}); out={"n_runs":len(reps),"format_ok":sum(r["fmt_ok"] for r in C),"n":len(C)}
+    for d,k,tag in (("results_70b","llama-3.3-70b-instruct-fp8-fast","j70"),("results","deepseek-v4-pro-0813","jds")):
+        S=summary(d); per=[statistics.mean(r["judges"][k]["score"] for r in C if r["rep"]==i) for i in reps]
+        out[tag]={"mean":round(statistics.mean(per),3),"base_mu":round(S["mu"],3),"lift":round(statistics.mean(per)-S["mu"],3),"p":round(perm_p(per,S["null"]),3),
+                  "criteria":{c:round(statistics.mean(r["judges"][k]["criteria"][c] for r in C),2) for c in ("brand_fit","specificity","claim_safety","goal_fit")}}
+    return out
 ABORTED_USD=0.19  # run 2's first attempt, stopped by a 429 after one evaluation pass (from its run.log)
-data={"run1":run("results_70b"),"run2":run("results"),"calib":calib(),"agree":agree("results"),"calib_usd":calib_usd(),"aborted_usd":ABORTED_USD}
-if data["run2"]: data["cost_total"]=round(data["run1"]["total_usd"]+data["run2"]["total_usd"]+data["calib_usd"]+ABORTED_USD,2)
+data={"run1":run("results_70b"),"run2":run("results"),"calib":calib(),"agree":agree("results"),"calib_usd":calib_usd(),"aborted_usd":ABORTED_USD,"cross":crossjudge(),"control":control(),"addons_usd":0.36}
+if data["run2"]: data["cost_total"]=round(data["run1"]["total_usd"]+data["run2"]["total_usd"]+data["calib_usd"]+ABORTED_USD+data["addons_usd"],2)
 os.makedirs("deck",exist_ok=True)
 open("deck/data.js","w").write("window.DATA="+json.dumps(data,indent=1)+";\n")
 print("deck/data.js:",{k:(v is not None) for k,v in data.items()})

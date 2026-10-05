@@ -58,46 +58,71 @@ is something layers must learn. Judge repeats at temp 0 mostly measure server no
 
 ## Findings (Oct 2026 run)
 
-Two full runs on Workers AI through AI Gateway, same generator (llama-3.1-8b-instruct-fp8), same code, different judge.
-Artifacts: `results_70b/` (judge llama-3.3-70b-instruct-fp8-fast) and `results/` (judge deepseek-v4-pro-0813).
+Two full runs on Workers AI through AI Gateway: same generator (llama-3.1-8b-instruct-fp8) and code, different judge.
+Then two controls. Artifacts: `results_70b/` (judge llama-3.3-70b, judge-n 3), `results/` (judge deepseek-v4-pro, judge-n 2),
+`results_control/`, and `crossjudge.json` in each run dir. Total spend $3.99, including the calibration, the controls and one
+aborted attempt. The presentation is `deck/` (`python -m ladder.deck_data` refreshes its numbers).
 
-### 1. The free-tier judge capped the loop (run 1)
-Baseline held-out scored 4.56 of 5 on average (7 base-prompt runs), with a noise range of 0.71. Final held-out:
-baseline 4.69, lesson 4.88, rewrite 4.81, few-shot 4.81. Three layers finish "above the band", but only by 0.06-0.13,
-on one 4-brief draw, and the band's lower edge comes from a single outlier (lesson layer's iteration 0, before any
-learning, at 4.04). **No gain in run 1 is distinguishable from noise.** The judge gave 5.0 to copy with a preamble,
-markdown and a five-line layout, because the rubric has no format criterion.
+**Analysis rules** (`ladder/stats.py`):
+- The null is every held-out run that used the base prompt: all baseline iterations, the extra baseline runs, each layer's
+  iteration 0, and prompt-rewrite iterations before its first accepted candidate. Run 1 has 15 such runs, run 2 has 13.
+- A layer's lift is its mean over iterations 1-4 minus the null mean. p is a one-sided permutation test against the null,
+  used as a screen: 4 briefs and one generation per brief per run, so draws are not fully independent.
+- At 80% power this design detects a lift of about 0.3 points. Effects smaller than that are not claimed.
 
-### 2. Picking the judge by test (`ladder/calibrate.py`, train briefs only)
-16 hand-written items: 5 good, 7 with one planted defect, 4 plausible but generic.
+### Headline
+At this scale, **the judge decided the result, not the layer.** Swapping the judge moved base-prompt scores from 4.65 to 3.64.
+No learned layer beat a one-line static prompt change. On the same outputs, the two judges barely agreed on which output was
+better.
 
-judge | defects caught | good | mediocre | defect | good-mediocre gap | repeat-inconsistent at temp 0 | $/call
---|--|--|--|--|--|--|--
-llama-3.3-70b | 7/7 | 4.85 | 3.56 | 2.39 | +1.29 | 0/16 | 0.0002
-deepseek-v4-pro | 7/7 | 4.90 | 2.50 | 1.88 | +2.40 | 9/16 | 0.0034
-glm-5.3 | 7/7 | 4.80 | 2.66 | 2.27 | +2.14 | 7/16 | 0.0036
+| | 70B judge | DeepSeek judge |
+|---|---|---|
+| Base-prompt mean (n) | 4.65 (15) | 3.64 (13) |
+| Lesson in context, lift (p) | +0.16 (0.010) | +0.02 (0.45) |
+| Prompt rewrite | base prompt throughout (0 of 4 accepted) | +0.07 (0.29), 1 of 4 accepted |
+| Retrieved few-shot | +0.11 (0.08) | +0.01 (0.47) |
+| **Static control: rubric + forbidden claims in the prompt** | +0.07 (0.31) | **+0.20 (0.004)** |
+| Final outputs breaking the 3-line format (their mean score) | 14/16 (4.80) | 15/16 (3.68) |
 
-Every judge catches obvious defects. They differ on *mediocre* copy: the 70B scores generic copy that would fit any
-business at 3.56 (one item at 4.0), which is why run 1 had no headroom. Its temp-0 repeats were identical on all
-16 items, so the scaffold's 3x judge averaging bought nothing on that judge. The DeepSeek judge varies at temp 0, so
-averaging does reduce noise there. Caveat: I wrote these labels, so this is a sanity check; the hand scores are the
-independent test. kimi-k2.6 was dropped: its reasoning overran the token budget on the rubric prompt and returned
-empty content.
+### What holds up
+1. **The 70B judge is saturated.** Every run-1 final output got 5 on brand fit and 5 on claim safety. Its scores have a
+   spread of 0.13 against DeepSeek's 0.53 on the same outputs. This is consistent with leniency and score compression in
+   rubric judges (Thakur et al. 2024). A Llama judge scoring Llama output may also prefer it (Panickssery et al. 2024); that
+   is a hypothesis, not tested here.
+2. **The spec beat the learners.** Under DeepSeek, putting the rubric and the brief's forbidden claims in the prompt scored
+   +0.20 with no learning. The learned layers managed +0.01 to +0.07. The lessons mostly re-derived the rubric. The one
+   accepted prompt rewrite was essentially "avoid absolute, unverifiable claims".
+3. **Judges disagree on real outputs.** Calibration: on 16 known items, both judges rank every good item above every generic
+   one and give the targeted criterion a 1 on every defect. Cross-judging: on the 32 actual final outputs, rank agreement is
+   only Spearman 0.26 (run 1) and 0.16 (run 2). Ordering planted items correctly says little about ordering mid-quality ones.
+4. **Temperature 0 is not deterministic, but it is not the main noise.** The 70B's repeats were identical on all 16
+   calibration items, while DeepSeek's differed on 9 (consistent with Atil et al. 2024). Judge-repeat noise is only ~15% of
+   the variance of a 4-brief mean in run 2. Generation and brief-to-brief variance dominate, so extra judge calls are the
+   least useful place to spend.
 
-### 3. Honest failures
-- **Prompt rewrite never fired (run 1: 0 of 4 accepted).** The 8B rewriter returned hero copy instead of a prompt, or
-  prompts locked to one train brief ("...for a savings account designed for freelancers"). Each candidate scored lower
-  on train, and the gate rejected it. The accept-only-if-better gate was the only thing preventing harm, and the line
-  on the plot is just the base prompt plus noise. A GEPA-style reflective edit needs a reflector stronger than the
-  model it is editing.
-- **The lesson distiller ignored "ONE short lesson"** and wrote numbered lists with preambles. The content was
-  sensible (be specific, avoid absolute claims, make the CTA direct).
-- **The few-shot bank was not selective under the lenient judge.** All 8 train outputs cleared the 4.0 threshold,
-  including format-breaking ones, so judge leniency flowed straight into what the layer learned from.
-- **Requested generator was gone.** `@cf/meta/llama-3.1-8b-instruct` was deprecated 2026-05-30 and returned 410; the
-  fp8 build of the same model was used instead.
+### Honest failures
+- **The run-1 lesson lift did not replicate** under the second judge. Cross-judging does not settle why: DeepSeek also scores
+  run 1's lesson outputs above that run's base-prompt outputs (3.78 vs 3.38), but with 4 briefs and one draw each, a small
+  real effect and noise look the same. We claim neither.
+- **Prompt rewrite (GEPA-inspired: one candidate, no Pareto selection, thin feedback) barely worked.** The 8B reflector
+  returned hero copy or prompts locked to one train brief, in one case with "[Brand Name]" left in. A gym advert used as the
+  system prompt scored within 0.08 of the real prompt on train, so the gate's rejections were mostly within one pass's noise.
+  This is consistent with small optimisers failing the meta-task (Revisiting OPRO, 2024). ACE gets gains with one large model
+  in every role, so the problem here is reflector size and feedback quality, not the layer as such.
+- **The first analysis was wrong.** The noise band used 7 of the 15 base-prompt runs, and a final-iteration "gain". That made
+  the base prompt look like it beat its own noise band. An adversarial review caught it, and `stats.py` replaces it.
+- **Absolute thresholds import the judge's scale.** All 8 train outputs cleared the few-shot bar under the 70B, format breakers
+  included.
+- **Format went unpoliced.** The rubric has no format criterion, so outputs with preambles and markdown scored as high as clean
+  ones. That belongs in code, not in a judge.
+- **Infrastructure:** the requested `@cf/meta/llama-3.1-8b-instruct` was deprecated on 2026-05-30, so the fp8 build was used.
+  Run 2's first attempt hit Workers AI per-minute limits. DeepSeek returned 14 transient HTTP 500s, all retried successfully.
+  Kimi k2.6 was dropped as a judge because its reasoning overran the token budget and returned empty content.
 
-RUN2_PLACEHOLDER
+### Caveats
+12 synthetic briefs, one generator, one generation per brief per run. The calibration labels were written by the
+experimenter. The decision to switch judges was made after seeing run 1's held-out ceiling, though calibration used train
+briefs only. The judge-n differs between runs (3 vs 2); this hardly matters because the 70B's repeats were identical.
 
 ## Publish to GitHub
     git init && git add -A && git commit -m "Layer ladder demo scaffold"

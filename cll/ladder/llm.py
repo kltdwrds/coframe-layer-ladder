@@ -1,5 +1,5 @@
 import os, json, re, threading, time, random
-from openai import RateLimitError
+from openai import RateLimitError, InternalServerError
 from openai import OpenAI
 # Backend: Cloudflare Workers AI through AI Gateway, via its OpenAI-compatible route.
 # The SDK appends /chat/completions, so base_url ends in /workers-ai/v1.
@@ -27,12 +27,12 @@ def chat(model,system,user,temperature=0.7,json_mode=False,max_tokens=400,meta=N
     kw={"response_format":{"type":"json_object"}} if json_mode else {}
     # cf-aig-metadata tags each request so the gateway log can be joined back to layer/iter/brief.
     hdr={"cf-aig-metadata":json.dumps(meta)} if meta else None
-    for attempt in range(8):  # Workers AI per-minute limits: back off well past the SDK's short retries
+    for attempt in range(8):  # back off well past the SDK's short retries
         try:
             r=client().chat.completions.create(model=model,temperature=temperature,max_tokens=max_tokens,
                 messages=[{"role":"system","content":system},{"role":"user","content":user}],extra_headers=hdr,**kw)
             break
-        except RateLimitError:
+        except (RateLimitError, InternalServerError):  # 429s and transient Workers AI 500s
             if attempt==7: raise
             time.sleep(min(60,5*2**attempt)+random.random()*3)
     u=r.usage; pi,po=PRICE.get(model,(0.293,2.253))

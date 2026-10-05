@@ -25,7 +25,7 @@ Backend is Cloudflare Workers AI through AI Gateway (OpenAI-compatible route, op
     ./run.sh                       # full run, plot, gain table, blind hand-score sheet, gateway trace
     .venv/bin/python -m ladder.hand_score agree   # after filling hand_score
 
-Env: `GEN_MODEL` (@cf/meta/llama-3.1-8b-instruct), `JUDGE_MODEL` (@cf/meta/llama-3.3-70b-instruct-fp8-fast). Use a different model for judge than generator on purpose.
+Env: `GEN_MODEL` (@cf/meta/llama-3.1-8b-instruct-fp8; the requested non-fp8 build was deprecated by Cloudflare on 2026-05-30), `JUDGE_MODEL` (@cf/meta/llama-3.3-70b-instruct-fp8-fast). Use a different model for judge than generator on purpose.
 Outputs in `results/`: `history.json`, `heldout_outputs.json`, `heldout_vs_iter.png`, `gain_per_dollar.md`, `edit_log.jsonl` (diagnoses, lessons,
 rewrite candidates with accept/reject, few-shot bank adds), `hand_scores.csv` + `hand_scores_key.json`, `judge_agreement.md`,
 `gateway_trace.jsonl` + `gateway_trace_summary.md`, `run.log`. Every request carries `cf-aig-metadata` (layer, iter, phase, brief, role).

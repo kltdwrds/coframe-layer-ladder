@@ -2,10 +2,11 @@ import os, json, re, time
 from openai import OpenAI
 # Backend: Cloudflare Workers AI through AI Gateway, via its OpenAI-compatible route.
 # The SDK appends /chat/completions, so base_url ends in /workers-ai/v1.
-GEN_MODEL=os.getenv("GEN_MODEL","@cf/meta/llama-3.1-8b-instruct")
+# @cf/meta/llama-3.1-8b-instruct was deprecated 2026-05-30; the fp8 build is the same model, quantised.
+GEN_MODEL=os.getenv("GEN_MODEL","@cf/meta/llama-3.1-8b-instruct-fp8")
 JUDGE_MODEL=os.getenv("JUDGE_MODEL","@cf/meta/llama-3.3-70b-instruct-fp8-fast")
 # USD per 1M tokens (in, out), Workers AI list price ($0.011 / 1k neurons). Edit if prices change.
-PRICE={"@cf/meta/llama-3.1-8b-instruct":(0.282,0.827),"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(0.293,2.253)}
+PRICE={"@cf/meta/llama-3.1-8b-instruct-fp8":(0.152,0.287),"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(0.293,2.253)}
 NEURONS_PER_USD=1000/0.011
 _c=None; USAGE={"usd":0.0,"tokens":0,"calls":0}
 def env(k):
@@ -16,7 +17,9 @@ def client():
     global _c
     if _c is None:
         base=f"https://gateway.ai.cloudflare.com/v1/{env('CF_ACCOUNT_ID')}/{env('CF_GATEWAY_NAME')}/workers-ai/v1"
-        _c=OpenAI(base_url=base,api_key=env("CF_API_TOKEN"),max_retries=4,timeout=120)
+        # Same token twice: Authorization for Workers AI, cf-aig-authorization for an authenticated gateway.
+        _c=OpenAI(base_url=base,api_key=env("CF_API_TOKEN"),max_retries=4,timeout=120,
+                  default_headers={"cf-aig-authorization":f"Bearer {env('CF_API_TOKEN')}"})
     return _c
 def chat(model,system,user,temperature=0.7,json_mode=False,max_tokens=400,meta=None):
     kw={"response_format":{"type":"json_object"}} if json_mode else {}

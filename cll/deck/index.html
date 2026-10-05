@@ -94,7 +94,7 @@
       <div data-chart="strip"></div>
     </figure>
   </div>
-  <p class="foot">Leniency and compression in rubric judges: consistent with Thakur et al. 2024. A Llama judge scoring Llama output may also prefer it (Panickssery et al. 2024): a hypothesis here, not tested. Temp-0 nondeterminism: Atil et al. 2024. I wrote the calibration labels, so the hand scores on slide 8 are the independent check.</p>
+  <p class="foot">Leniency and compression in rubric judges: consistent with Thakur et al. 2024. A Llama judge scoring Llama output may also prefer it (Panickssery et al. 2024): a hypothesis here, not tested. Temp-0 nondeterminism: Atil et al. 2024. I wrote the calibration labels, so the hand scores on slide 9 are the independent check.</p>
 </section>
 
 <!-- 6 -->
@@ -150,13 +150,17 @@
 </section>
 
 <!-- 8 -->
-<section class="slide" aria-roledescription="slide" aria-label="8: Judge against a person">
-  <h2>Does the judge agree with a person?</h2>
+<section class="slide" aria-roledescription="slide" aria-label="9: Judge against a person">
+  <h2>Against a person, the free-tier judge told us nothing</h2>
   <div class="cols even">
     <div>
-      <p>Ten held-out outputs from run 2, scored by hand on the same rubric without seeing any judge score, then scored by both judges.</p>
-      <p data-unless="agree" class="muted">Pending: hand scores go in next.</p>
-      <div data-if="agree" id="agree-stats"></div>
+      <p>Ten run-2 held-out outputs, scored by hand without seeing any judge score, then scored by both judges.</p>
+      <div class="vs" data-if="agree_stats">
+        <div class="stat b"><span class="big" data-k="agree_stats.jds.r"></span>DeepSeek vs hand, Pearson r · off by <span data-k="agree_stats.jds.mad"></span> on average</div>
+        <div class="stat"><span class="big" data-k="agree_stats.j70.r"></span>70B vs hand · off by <span data-k="agree_stats.j70.mad"></span>; 9 of 10 scored 4.75 or higher</div>
+      </div>
+      <p class="note">Copy that invented “up to 30%” and “25%” improvement figures: hand 1, DeepSeek 3.25, the 70B 5.0.</p>
+      <p class="muted" style="font-size:var(--fs-small)">n = 10, so r is directional (95% CI for 0.53 is roughly −0.15 to 0.87). The scorer is the presenter and was not blind to the hypothesis, and scored format too, which the rubric omits. Scores were given on a shifted scale and moved down 2 points; correlations are unaffected, bias and distance are not.</p>
     </div>
     <figure class="chart-box" style="margin:0"><div data-chart="scatter"></div></figure>
   </div>

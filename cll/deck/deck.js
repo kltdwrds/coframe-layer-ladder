@@ -154,14 +154,14 @@
     var tip = tipFor(box);
     judges.forEach(function (j, ji) {
       pts.forEach(function (p) {
-        var c = el("circle", { cx: x(p.hand + (ji - 0.5) * 0.06), cy: y(p.judges[j]), r: 6, "class": "dot anim-fade " + cls[ji % 2] }, svg);
+        var c = el("circle", { cx: x(p.hand + (ji - 0.5) * 0.06), cy: y(p.judges[j]), r: 6, "class": "dot anim-fade " + (/70b/.test(j) ? "k-mediocre" : "k-good") }, svg);
         var hit = el("circle", { cx: x(p.hand), cy: y(p.judges[j]), r: 11, fill: "transparent" }, svg);
         hit.addEventListener("mousemove", function (e) { tip.show("<b>" + j + "</b><br><span class=k>row</span> " + p.row + " · " + p.layer + "<br><span class=k>hand</span> " + p.hand + " · <span class=k>judge</span> " + f2(p.judges[j]) + (p.comment ? "<br>" + p.comment : ""), e); });
         hit.addEventListener("mouseleave", tip.hide);
       });
     });
     var lg = document.createElement("div"); lg.className = "legend";
-    lg.innerHTML = judges.map(function (j, ji) { return '<span><i class="dot" style="background:var(' + (ji % 2 ? "--arm-b" : "--arm-a") + ')"></i>' + j + "</span>"; }).join("");
+    lg.innerHTML = judges.map(function (j) { return '<span><i class="dot" style="background:var(' + (/70b/.test(j) ? "--arm-a" : "--arm-b") + ')"></i>' + j.replace("-instruct-fp8-fast", "").replace("-0813", "") + "</span>"; }).join("");
     box.insertBefore(lg, box.firstChild);
   }
 

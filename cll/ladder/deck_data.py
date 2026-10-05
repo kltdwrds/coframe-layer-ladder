@@ -78,7 +78,17 @@ def control():
                   "criteria":{c:round(statistics.mean(r["judges"][k]["criteria"][c] for r in C),2) for c in ("brand_fit","specificity","claim_safety","goal_fit")}}
     return out
 ABORTED_USD=0.19  # run 2's first attempt, stopped by a 429 after one evaluation pass (from its run.log)
+def agree_stats(pts):
+    if not pts: return None
+    h=[p["hand"] for p in pts]; out={}
+    for j in pts[0]["judges"]:
+        v=[p["judges"][j] for p in pts]; mv,mh=statistics.mean(v),statistics.mean(h)
+        c=sum((a-mv)*(b-mh) for a,b in zip(v,h)); d=(sum((a-mv)**2 for a in v)*sum((b-mh)**2 for b in h))**.5
+        out["j70" if "70b" in j else "jds"]={"r":round(c/d,2) if d else None,"mad":round(statistics.mean(abs(a-b) for a,b in zip(v,h)),2),
+            "bias":round(mv-mh,2),"within1":round(sum(abs(a-b)<=1 for a,b in zip(v,h))/len(h),2),"sd":round(statistics.pstdev(v),2)}
+    out["n"]=len(pts); out["hand_sd"]=round(statistics.pstdev(h),2); return out
 data={"run1":run("results_70b"),"run2":run("results"),"calib":calib(),"agree":agree("results"),"calib_usd":calib_usd(),"aborted_usd":ABORTED_USD,"cross":crossjudge(),"control":control(),"addons_usd":0.36}
+data["agree_stats"]=agree_stats(data["agree"])
 if data["run2"]: data["cost_total"]=round(data["run1"]["total_usd"]+data["run2"]["total_usd"]+data["calib_usd"]+ABORTED_USD+data["addons_usd"],2)
 os.makedirs("deck",exist_ok=True)
 open("deck/data.js","w").write("window.DATA="+json.dumps(data,indent=1)+";\n")

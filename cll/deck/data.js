@@ -578,7 +578,108 @@ window.DATA={
    ]
   }
  ],
- "agree": null,
+ "agree": [
+  {
+   "row": "0",
+   "layer": "retrieved_fewshot",
+   "hand": 3.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 2.88,
+    "llama-3.3-70b-instruct-fp8-fast": 4.42
+   },
+   "comment": ""
+  },
+  {
+   "row": "1",
+   "layer": "retrieved_fewshot",
+   "hand": 2.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 3.5,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "2",
+   "layer": "lesson_in_context",
+   "hand": 4.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 4.38,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "3",
+   "layer": "baseline",
+   "hand": 2.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 3.12,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "4",
+   "layer": "lesson_in_context",
+   "hand": 3.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 3.12,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "5",
+   "layer": "prompt_rewrite",
+   "hand": 1.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 3.25,
+    "llama-3.3-70b-instruct-fp8-fast": 5
+   },
+   "comment": ""
+  },
+  {
+   "row": "6",
+   "layer": "lesson_in_context",
+   "hand": 4.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 4.5,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "7",
+   "layer": "retrieved_fewshot",
+   "hand": 3.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 3.38,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "8",
+   "layer": "prompt_rewrite",
+   "hand": 2.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 4.0,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  },
+  {
+   "row": "9",
+   "layer": "baseline",
+   "hand": 3.0,
+   "judges": {
+    "deepseek-v4-pro-0813": 3.62,
+    "llama-3.3-70b-instruct-fp8-fast": 4.75
+   },
+   "comment": ""
+  }
+ ],
  "calib_usd": 0.321,
  "aborted_usd": 0.19,
  "cross": {
@@ -817,39 +918,39 @@ window.DATA={
   "sdds": 0.53,
   "layer_means": {
    "run1": {
-    "retrieved_fewshot": {
+    "prompt_rewrite": {
      "j70": 4.81,
-     "jds": 3.72
+     "jds": 3.41
     },
     "lesson_in_context": {
      "j70": 4.88,
      "jds": 3.78
     },
+    "retrieved_fewshot": {
+     "j70": 4.81,
+     "jds": 3.72
+    },
     "baseline": {
      "j70": 4.69,
      "jds": 3.38
-    },
-    "prompt_rewrite": {
-     "j70": 4.81,
-     "jds": 3.41
     }
    },
    "run2": {
-    "retrieved_fewshot": {
-     "j70": 4.65,
-     "jds": 3.44
+    "prompt_rewrite": {
+     "j70": 4.88,
+     "jds": 3.81
     },
     "lesson_in_context": {
      "j70": 4.75,
      "jds": 3.84
     },
+    "retrieved_fewshot": {
+     "j70": 4.65,
+     "jds": 3.44
+    },
     "baseline": {
      "j70": 4.75,
      "jds": 3.84
-    },
-    "prompt_rewrite": {
-     "j70": 4.88,
-     "jds": 3.81
     }
    }
   }
@@ -884,5 +985,23 @@ window.DATA={
   }
  },
  "addons_usd": 0.36,
+ "agree_stats": {
+  "jds": {
+   "r": 0.53,
+   "mad": 0.9,
+   "bias": 0.88,
+   "within1": 0.6,
+   "sd": 0.52
+  },
+  "j70": {
+   "r": -0.45,
+   "mad": 2.04,
+   "bias": 2.04,
+   "within1": 0.2,
+   "sd": 0.13
+  },
+  "n": 10,
+  "hand_sd": 0.9
+ },
  "cost_total": 3.99
 };

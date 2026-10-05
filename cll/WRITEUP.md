@@ -21,7 +21,21 @@ At small scale the judge, not the lesson layer, decided the result: no learned l
 - **Cross-judge:** every final held-out output from both runs (32) re-scored by the other judge.
 - **After the run:** 10 held-out outputs from run 2, hand-scored blind (judge scores hidden, briefs shown), then compared with both judges using Pearson r, mean absolute difference, within-1-point rate and bias.
 
-HAND_SCORE_RESULTS (pending: fill once `python -m ladder.hand_score agree` has run)
+**Hand-score result (n = 10, run 2 held-out):**
+
+| Judge vs hand | Pearson r | Mean abs diff | Within 1 pt | Bias (judge − hand) |
+|---|---|---|---|---|
+| deepseek-v4-pro | +0.53 | 0.90 | 60% | +0.88 |
+| llama-3.3-70b | −0.45 | 2.04 | 20% | +2.04 |
+
+- **The 70B gave nothing usable.** It scored 9 of 10 outputs 4.75 or higher; its weak ranking ran opposite to the human's, and its scores averaged 2 points high.
+- **DeepSeek is directionally right but generous.** r = 0.53 at n = 10 is directional only: the 95% CI is roughly −0.15 to 0.87. It runs about 0.9 points high.
+- **The clearest single case:** copy that invented "up to 30%" and "25%" improvement figures got 1 from the human, 3.25 from DeepSeek and 5.0 from the 70B.
+- **Caveats:**
+  - The scorer is the presenter and was not blind to the hypothesis.
+  - The scorer also counted format, which the rubric omits.
+  - Scores were given on a shifted scale and moved down 2 points. Correlations are unaffected; bias and distance depend on the shift.
+  - The human rated the three lesson-layer outputs higher (3.7 vs 2.3 for the rest). With n = 3 this is an observation, not a claim.
 
 ## Results
 | | 70B judge | DeepSeek judge |

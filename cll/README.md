@@ -100,6 +100,15 @@ better.
    the variance of a 4-brief mean in run 2. Generation and brief-to-brief variance dominate, so extra judge calls are the
    least useful place to spend.
 
+5. **Against a human, the 70B judge told us nothing.** On 10 blind-scored run-2 outputs:
+
+   | Judge vs hand | Pearson r | Mean abs diff |
+   |---|---|---|
+   | DeepSeek | +0.53 | 0.90 |
+   | 70B | −0.45 | 2.04 |
+
+   The 70B scored 9 of 10 at 4.75 or higher, including copy that invented "30%" and "25%" improvement figures, which the human scored 1. The hand scorer is the presenter, scored format as well, and used a shifted scale that was moved down 2 points; this affects bias, not correlation. n = 10, so the correlation is directional (95% CI about −0.15 to 0.87).
+
 ### Honest failures
 - **The run-1 lesson lift did not replicate** under the second judge. Cross-judging does not settle why: DeepSeek also scores
   run 1's lesson outputs above that run's base-prompt outputs (3.78 vs 3.38), but with 4 briefs and one draw each, a small

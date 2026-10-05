@@ -12,7 +12,7 @@ mkdir -p results
 START=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 python -m ladder.run "$@" 2>&1 | tee results/run.log
 [ $DRY = 1 ] && exit 0
-python -m ladder.plot
+python -m ladder.plot results
 python -m ladder.hand_score make
 python -m ladder.trace "$START" || echo "gateway trace export failed (logging off or token lacks AI Gateway Read?)"
 echo "Now fill hand_score in results/hand_scores.csv, then: python -m ladder.hand_score agree"

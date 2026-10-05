@@ -1,22 +1,25 @@
-import json, statistics, matplotlib; matplotlib.use("Agg")
+import json, sys, matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-H=json.load(open("results/history.json")); h=H["history"]
-# Noise floor: baseline extra runs plus every layer's iter 0 (all iter-0 runs use the identical base prompt).
-noise=(H.get("baseline_noise") or [])+[v[0]["heldout"] for v in h.values()]
-lo,hi,mu=min(noise),max(noise),statistics.mean(noise); floor=hi-lo
+from .stats import summary
+d=sys.argv[1] if len(sys.argv)>1 else "results"
+S=summary(d); H=json.load(open(f"{d}/history.json")); h=H["history"]
 fig,ax=plt.subplots(figsize=(7,4))
 iters=[x["iter"] for x in next(iter(h.values()))]
-ax.fill_between(iters,lo,hi,color="grey",alpha=.2,label=f"baseline noise (n={len(noise)})")
+ax.fill_between(iters,S["lo"],S["hi"],color="grey",alpha=.18,label=f"base-prompt range (n={len(S['null'])})")
+ax.axhline(S["mu"],color="grey",lw=1,ls=":",label=f"base-prompt mean {S['mu']:.2f}")
 for k,v in h.items():
-    ax.plot([x["iter"] for x in v],[x["heldout"] for x in v],marker="o",label=k,ls="--" if k=="baseline" else "-")
-ax.set_xlabel("iteration"); ax.set_ylabel("held-out judge score (1-5)"); ax.set_xticks(iters); ax.legend(fontsize=8); ax.grid(alpha=.3)
-ax.set_title(f"judge {H['judge_model'].split('/')[-1]}, judge-n={H['judge_n']}",fontsize=9)
-fig.tight_layout(); fig.savefig("results/heldout_vs_iter.png",dpi=150)
-# Gain = final held-out minus the pooled base-prompt mean (less noisy than one iter-0 sample).
-rows=[f"noise floor (range of {len(noise)} base-prompt held-out runs): {floor:.2f}; base mean {mu:.2f}","",
-      "layer | final held-out | gain vs base mean | outside noise band? | learning $ | total $ | gain per learning $ | tokens","--|--|--|--|--|--|--|--"]
-for k,v in h.items():
-    g=v[-1]["heldout"]-mu; lu=v[-1]["update_usd_cum"]; d=v[-1]["usd_cum"]
-    gp=f"{g/lu:+.0f}" if lu else "n/a (free)"
-    rows.append(f"{k} | {v[-1]['heldout']:.2f} | {g:+.2f} | {'above band' if v[-1]['heldout']>hi else 'BELOW band' if v[-1]['heldout']<lo else 'no (inside band)'} | {lu:.4f} | {d:.3f} | {gp} | {v[-1]['tokens_cum']}")
-open("results/gain_per_dollar.md","w").write("\n".join(rows)+"\n"); print("\n".join(rows))
+    ax.plot([x["iter"] for x in v],[x["heldout"] for x in v],marker="o",label=k,ls="--" if S["layers"][k]["is_null"] else "-")
+ax.set_xlabel("iteration"); ax.set_ylabel("held-out judge score (1-5)"); ax.set_xticks(iters); ax.legend(fontsize=7); ax.grid(alpha=.3)
+ax.set_title(f"judge {S['judge']}, judge-n={S['judge_n']}  (dashed = base prompt throughout)",fontsize=9)
+fig.tight_layout(); fig.savefig(f"{d}/heldout_vs_iter.png",dpi=150)
+rows=[f"Null: {len(S['null'])} held-out runs that used the base prompt; mean {S['mu']:.2f}, sd {S['sd']:.2f}, range {S['lo']:.2f}-{S['hi']:.2f}.",
+      f"Smallest lift this design detects at 80% power: ~{S['mde80']:.2f}. Lift = mean of iterations 1-4 minus the null mean; p = one-sided permutation vs the null (a screen, not a test).",
+      f"Format: {S['format_bad']}/{S['format_n']} final held-out outputs break the 3-line format (mean judge score {S['format_bad_mean'] or 0:.2f}).","",
+      "layer | mean held-out, iters 1-4 | lift vs base mean | p | learning $ (update calls) | total $ | tokens","--|--|--|--|--|--|--"]
+for k,v in S["layers"].items():
+    note=" (base prompt throughout)" if v["is_null"] else ""
+    p="-" if v["p"] is None else f"{v['p']:.3f}"
+    rows.append(f"{k}{note} | {v['post_mean']:.2f} | {v['lift']:+.2f} | {p} | {v['learn_usd']:.4f} | {v['total_usd']:.3f} | {v['tokens']}")
+if "prompt_rewrite" in S["layers"]:
+    r=S["layers"]["prompt_rewrite"]; rows+=["",f"prompt_rewrite: {r['accepted']} of {r['accepted']+r['rejected']} candidates accepted; candidate minus incumbent train score: {r['margins']}"]
+open(f"{d}/gain_per_dollar.md","w").write("\n".join(rows)+"\n"); print("\n".join(rows))

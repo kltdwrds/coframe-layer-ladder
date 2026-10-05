@@ -39,12 +39,14 @@
     for (var i = 0; i < n; i++) txt("text", { x: x(i), y: T + ph + 18, "text-anchor": "middle", "class": "tick" }, i, svg);
     txt("text", { x: L + pw / 2, y: H - 4, "text-anchor": "middle", "class": "axis-title" }, "learning iteration", svg);
     el("rect", { x: L, width: pw, y: y(run.hi), height: Math.max(1, y(run.lo) - y(run.hi)), "class": "band anim-fade" }, svg);
-    txt("text", { x: L + 6, y: y(run.lo) - 6, "class": "band-label anim-fade" }, "noise: range of " + run.noise.length + " base-prompt runs", svg);
+    el("line", { x1: L, x2: L + pw, y1: y(run.mu), y2: y(run.mu), stroke: "var(--graphite)", "stroke-dasharray": "2 3", "class": "anim-fade" }, svg);
+    txt("text", { x: L + 6, y: y(run.lo) - 6, "class": "band-label anim-fade" }, "range of " + run.noise.length + " base-prompt runs · dotted = their mean " + f2(run.mu), svg);
     var tip = tipFor(box), labels = [];
     ORDER.forEach(function (k, si) {
       var s = run.layers[k]; if (!s) return;
       var d = s.heldout.map(function (v, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1); }).join(" ");
       var p = el("path", { d: d, "class": "series anim-line s-" + k }, svg);
+      if (s.is_null && k !== "baseline") p.setAttribute("stroke-dasharray", "5 4");
       p.dataset.len = "1";
       s.heldout.forEach(function (v, i) {
         var c = el("circle", { cx: x(i), cy: y(v), r: 4.5, "class": "dot anim-fade s-" + k }, svg);
@@ -52,12 +54,12 @@
         hit.addEventListener("mousemove", function (e) { tip.show("<b>" + NAMES[k] + "</b><br><span class=k>iteration</span> " + i + " · <span class=k>held-out</span> " + f2(v) + "<br><span class=k>train</span> " + f2(s.train[i]), e); });
         hit.addEventListener("mouseleave", tip.hide);
       });
-      labels.push({ k: k, y: y(s.heldout[s.heldout.length - 1]), v: s.heldout[s.heldout.length - 1] });
+      labels.push({ k: k, y: y(s.heldout[s.heldout.length - 1]), v: s.heldout[s.heldout.length - 1], nul: s.is_null && k !== "baseline" });
     });
     // direct labels at line ends, nudged apart
     labels.sort(function (a, b) { return a.y - b.y; });
     for (var j = 1; j < labels.length; j++) if (labels[j].y - labels[j - 1].y < 16) labels[j].y = labels[j - 1].y + 16;
-    labels.forEach(function (l) { txt("text", { x: L + pw + 10, y: l.y + 4, "class": "lbl anim-fade" }, NAMES[l.k] + " " + f2(l.v), svg); });
+    labels.forEach(function (l) { txt("text", { x: L + pw + 10, y: l.y + 4, "class": "lbl anim-fade" }, NAMES[l.k] + (l.nul ? " (base prompt)" : ""), svg); });
     dataTable(box, ["layer"].concat(Array.from({ length: n }, function (_, i) { return "iter " + i; })),
       ORDER.filter(function (k) { return run.layers[k]; }).map(function (k) { return [NAMES[k]].concat(run.layers[k].heldout.map(f2)); }));
   }
@@ -105,7 +107,7 @@
     var W = 640, rowH = 30, L = 170, R = 70, T = 20, gap = 26;
     var blocks = runs.filter(function (r) { return r.run; });
     var H = T + blocks.length * (ORDER.length * rowH + gap) + 24, pw = W - L - R;
-    var ext = 0.1; blocks.forEach(function (b) { ORDER.forEach(function (k) { var s = b.run.layers[k]; if (s) ext = Math.max(ext, Math.abs(s.gain)); }); ext = Math.max(ext, (b.run.hi - b.run.mu), (b.run.mu - b.run.lo)); });
+    var ext = 0.1; blocks.forEach(function (b) { ORDER.forEach(function (k) { var s = b.run.layers[k]; if (s) ext = Math.max(ext, Math.abs(s.lift)); }); ext = Math.max(ext, b.run.mde80); });
     ext = Math.ceil(ext * 10) / 10;
     var x = function (v) { return L + pw * (v + ext) / (2 * ext); };
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Final held-out gain over the pooled base-prompt mean, per layer, for each judge, with the noise range." }, box);
@@ -113,17 +115,17 @@
     blocks.forEach(function (b) {
       var top = y0, bot = y0 + ORDER.length * rowH;
       txt("text", { x: 0, y: top - 6, "class": "lbl muted" }, "Judge: " + b.run.judge.replace("-instruct-fp8-fast", "").replace("-0813", ""), svg);
-      el("rect", { x: x(b.run.lo - b.run.mu), width: x(b.run.hi - b.run.mu) - x(b.run.lo - b.run.mu), y: top, height: bot - top, "class": "band anim-fade" }, svg);
+      el("rect", { x: x(-b.run.mde80), width: x(b.run.mde80) - x(-b.run.mde80), y: top, height: bot - top, "class": "band anim-fade" }, svg);
       el("line", { x1: x(0), x2: x(0), y1: top, y2: bot, "class": "axis" }, svg);
       ORDER.forEach(function (k, i) {
         var s = b.run.layers[k]; if (!s) return;
         var cy = top + i * rowH + rowH / 2;
         txt("text", { x: L - 12, y: cy + 4, "text-anchor": "end", "class": "lbl" }, NAMES[k], svg);
-        var x1 = Math.min(x(0), x(s.gain)), w = Math.abs(x(s.gain) - x(0));
+        var x1 = Math.min(x(0), x(s.lift)), w = Math.abs(x(s.lift) - x(0));
         var r = el("rect", { x: x1, y: cy - 7, width: Math.max(2, w), height: 14, rx: 3, "class": "s-" + k + " anim-fade" }, svg);
-        txt("text", { x: (s.gain >= 0 ? x(s.gain) + 6 : x(s.gain) - 6), y: cy + 4, "text-anchor": s.gain >= 0 ? "start" : "end", "class": "lbl" }, sign(s.gain), svg);
+        txt("text", { x: (s.lift >= 0 ? x(s.lift) + 6 : x(s.lift) - 6), y: cy + 4, "text-anchor": s.lift >= 0 ? "start" : "end", "class": "lbl" }, sign(s.lift) + (s.p != null ? "  p=" + s.p.toFixed(2) : s.is_null ? "  (base prompt)" : ""), svg);
         var hit = el("rect", { x: L, y: cy - rowH / 2, width: pw, height: rowH, fill: "transparent" }, svg);
-        hit.addEventListener("mousemove", function (e) { tip.show("<b>" + NAMES[k] + "</b><br><span class=k>final held-out</span> " + f2(s.final) + " · <span class=k>gain</span> " + sign(s.gain) + "<br><span class=k>learning cost</span> $" + s.learn_usd.toFixed(4) + (s.accepted != null ? "<br><span class=k>rewrites accepted</span> " + s.accepted + " of " + (s.accepted + s.rejected) : ""), e); });
+        hit.addEventListener("mousemove", function (e) { tip.show("<b>" + NAMES[k] + "</b><br><span class=k>mean held-out, iters 1–4</span> " + f2(s.post_mean) + " · <span class=k>lift</span> " + sign(s.lift) + (s.p != null ? " · <span class=k>p</span> " + s.p.toFixed(3) : "") + "<br><span class=k>learning cost</span> $" + s.learn_usd.toFixed(4) + (s.accepted != null ? "<br><span class=k>rewrites accepted</span> " + s.accepted + " of " + (s.accepted + s.rejected) : ""), e); });
         hit.addEventListener("mouseleave", tip.hide);
       });
       y0 = bot + gap + 14;

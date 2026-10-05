@@ -4,17 +4,27 @@ window.DATA={
   "judge_n": 3,
   "gen": "llama-3.1-8b-instruct-fp8",
   "noise": [
+   4.708,
+   4.75,
+   4.75,
+   4.688,
+   4.688,
    4.333,
    4.75,
    4.625,
-   4.708,
    4.042,
    4.688,
-   4.75
+   4.75,
+   4.688,
+   4.812,
+   4.688,
+   4.812
   ],
   "lo": 4.042,
-  "hi": 4.75,
-  "mu": 4.557,
+  "hi": 4.812,
+  "mu": 4.651,
+  "sd": 0.203,
+  "mde80": 0.319,
   "layers": {
    "baseline": {
     "heldout": [
@@ -31,10 +41,14 @@ window.DATA={
      4.708,
      4.625
     ],
+    "post_mean": 4.719,
+    "lift": 0.067,
+    "p": null,
+    "is_null": true,
     "final": 4.688,
-    "gain": 0.131,
     "learn_usd": 0.0,
-    "total_usd": 0.045
+    "total_usd": 0.045,
+    "tokens": 83789
    },
    "lesson_in_context": {
     "heldout": [
@@ -51,10 +65,14 @@ window.DATA={
      4.823,
      4.677
     ],
+    "post_mean": 4.812,
+    "lift": 0.161,
+    "p": 0.01,
+    "is_null": false,
     "final": 4.875,
-    "gain": 0.318,
-    "learn_usd": 0.0004,
-    "total_usd": 0.049
+    "learn_usd": 0.0,
+    "total_usd": 0.049,
+    "tokens": 100622
    },
    "prompt_rewrite": {
     "heldout": [
@@ -71,12 +89,22 @@ window.DATA={
      4.75,
      4.719
     ],
+    "post_mean": 4.75,
+    "lift": 0.099,
+    "p": null,
+    "is_null": true,
     "final": 4.812,
-    "gain": 0.256,
     "learn_usd": 0.026,
     "total_usd": 0.071,
+    "tokens": 136328,
     "accepted": 0,
-    "rejected": 4
+    "rejected": 4,
+    "margins": [
+     -0.084,
+     -0.115,
+     -0.084,
+     -1.052
+    ]
    },
    "retrieved_fewshot": {
     "heldout": [
@@ -93,11 +121,34 @@ window.DATA={
      4.646,
      4.635
     ],
+    "post_mean": 4.76,
+    "lift": 0.109,
+    "p": 0.081,
+    "is_null": false,
     "final": 4.812,
-    "gain": 0.256,
     "learn_usd": 0.0,
-    "total_usd": 0.045
+    "total_usd": 0.045,
+    "tokens": 87975
    }
+  },
+  "format_bad": 14,
+  "format_n": 16,
+  "format_bad_mean": 4.804,
+  "criteria_values": {
+   "brand_fit": [
+    5
+   ],
+   "specificity": [
+    4,
+    5
+   ],
+   "claim_safety": [
+    5
+   ],
+   "goal_fit": [
+    4,
+    5
+   ]
   },
   "total_usd": 0.219,
   "calls": 1144,
@@ -109,11 +160,17 @@ window.DATA={
   "gen": "llama-3.1-8b-instruct-fp8",
   "noise": [
    3.5,
+   3.75,
+   3.75,
+   3.75,
+   3.844,
    3.531
   ],
   "lo": 3.5,
-  "hi": 3.531,
-  "mu": 3.516,
+  "hi": 3.844,
+  "mu": 3.688,
+  "sd": 0.138,
+  "mde80": 0.25,
   "layers": {
    "baseline": {
     "heldout": [
@@ -130,10 +187,14 @@ window.DATA={
      3.641,
      3.547
     ],
+    "post_mean": 3.773,
+    "lift": 0.086,
+    "p": null,
+    "is_null": true,
     "final": 3.844,
-    "gain": 0.328,
     "learn_usd": 0.0,
-    "total_usd": 0.563
+    "total_usd": 0.563,
+    "tokens": 182617
    },
    "lesson_in_context": {
     "heldout": [
@@ -150,11 +211,44 @@ window.DATA={
      3.781,
      3.906
     ],
+    "post_mean": 3.664,
+    "lift": -0.023,
+    "p": 0.616,
+    "is_null": false,
     "final": 3.844,
-    "gain": 0.328,
-    "learn_usd": 0.0003,
-    "total_usd": 0.572
+    "learn_usd": 0.0,
+    "total_usd": 0.572,
+    "tokens": 199346
    }
+  },
+  "format_bad": 7,
+  "format_n": 8,
+  "format_bad_mean": 3.75,
+  "criteria_values": {
+   "brand_fit": [
+    3,
+    4,
+    4.5,
+    5
+   ],
+   "specificity": [
+    2,
+    2.5,
+    3,
+    3.5
+   ],
+   "claim_safety": [
+    2,
+    3,
+    3.5,
+    4,
+    5
+   ],
+   "goal_fit": [
+    4,
+    4.5,
+    5
+   ]
   },
   "total_usd": 1.134,
   "calls": 364,

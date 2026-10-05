@@ -2,20 +2,17 @@
 Reads results_70b/ (run 1), results/ (run 2, if present), the calibration table and the judge-agreement key."""
 import json, os, re, csv, statistics
 def run(d):
-    p=f"{d}/history.json"
-    if not os.path.exists(p): return None
-    H=json.load(open(p)); h=H["history"]
-    noise=(H.get("baseline_noise") or [])+[v[0]["heldout"] for v in h.values()]
-    mu=statistics.mean(noise)
-    layers={k:{"heldout":[round(x["heldout"],3) for x in v],"train":[round(x["train"],3) for x in v],
-               "final":round(v[-1]["heldout"],3),"gain":round(v[-1]["heldout"]-mu,3),
-               "learn_usd":round(v[-1]["update_usd_cum"],4),"total_usd":round(v[-1]["usd_cum"],3),
-               **({"accepted":v[-1].get("accepted"),"rejected":v[-1].get("rejected")} if "accepted" in v[-1] else {})}
-            for k,v in h.items()}
+    if not os.path.exists(f"{d}/history.json"): return None
+    from .stats import summary
+    S=summary(d); H=json.load(open(f"{d}/history.json")); h=H["history"]
+    r=lambda x: None if x is None else round(x,3)
+    layers={k:{"heldout":[r(x["heldout"]) for x in v],"train":[r(x["train"]) for x in v],
+               **{a:(r(b) if isinstance(b,float) else b) for a,b in S["layers"][k].items()}} for k,v in h.items()}
     bank=sum(1 for l in open(f"{d}/edit_log.jsonl") if '"bank_add"' in l) if os.path.exists(f"{d}/edit_log.jsonl") else None
-    return {"judge":H["judge_model"].split("/")[-1],"judge_n":H["judge_n"],"gen":H["gen_model"].split("/")[-1],
-            "noise":[round(x,3) for x in noise],"lo":round(min(noise),3),"hi":round(max(noise),3),"mu":round(mu,3),
-            "layers":layers,"total_usd":round(H["total_usd"],3),"calls":H.get("calls"),"bank_adds":bank}
+    return {"judge":S["judge"],"judge_n":S["judge_n"],"gen":H["gen_model"].split("/")[-1],"noise":[r(x) for x in S["null"]],
+            "lo":r(S["lo"]),"hi":r(S["hi"]),"mu":r(S["mu"]),"sd":r(S["sd"]),"mde80":r(S["mde80"]),"layers":layers,
+            "format_bad":S["format_bad"],"format_n":S["format_n"],"format_bad_mean":r(S["format_bad_mean"]),
+            "criteria_values":S["criteria_values"],"total_usd":r(S["total_usd"]),"calls":S["calls"],"bank_adds":bank}
 def calib(p="results_70b/judge_calibration.md"):
     out=[]; cur=None
     for line in open(p):

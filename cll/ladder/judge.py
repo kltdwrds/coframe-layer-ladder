@@ -1,4 +1,5 @@
 import json, os, statistics
+from concurrent.futures import ThreadPoolExecutor
 from .llm import chat, parse_json, JUDGE_MODEL
 RUB=json.load(open("data/rubric.json"))
 SYS="You are a strict marketing copy reviewer. Score only against the rubric. Reply JSON only."
@@ -14,7 +15,7 @@ Return JSON: {{"brand_fit":int,"specificity":int,"claim_safety":int,"goal_fit":i
         except (ValueError,KeyError,TypeError) as e:
             if attempt: raise
 def judge(brief,out,n=1,meta=None):
-    rs=[judge_once(brief,out,meta) for _ in range(n)]
+    with ThreadPoolExecutor(n) as ex: rs=list(ex.map(lambda _:judge_once(brief,out,meta),range(n)))
     means={k:statistics.mean(r[k] for r in rs) for k in KEYS}
     return {"score":statistics.mean(means.values()),"criteria":means,"note":rs[0].get("note",""),
             "judge_spread":max(statistics.mean(r[k] for k in KEYS) for r in rs)-min(statistics.mean(r[k] for k in KEYS) for r in rs)}

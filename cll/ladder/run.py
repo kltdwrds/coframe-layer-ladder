@@ -1,4 +1,5 @@
 import json, argparse, os
+from concurrent.futures import ThreadPoolExecutor
 from .llm import chat, GEN_MODEL, JUDGE_MODEL, PRICE, NEURONS_PER_USD, USAGE
 from .judge import judge
 from .layers import LAYERS, LOG, Baseline
@@ -31,12 +32,12 @@ def gen(layer,b,meta):
     u=f"Brief: {b['brief']}\nAudience: {b['audience']}\nGoal: {b['goal']}\nVoice: {b['voice']}"
     return chat(GEN_MODEL,layer.system(b),u,temperature=0.7,max_tokens=150,meta=meta).strip()
 def evaluate(layer,bs,tag):
-    res=[]
-    for b in bs:
+    # briefs run concurrently (pure I/O); order is preserved, and update() still runs between passes
+    def one(b):
         m={**tag,"brief":b["id"]}
         o=gen(layer,b,{**m,"role":"gen"}); j=judge(b,o,a.judge_n,{**m,"role":"judge"})
-        res.append({"id":b["id"],"brief":b["brief"],"audience":b["audience"],"out":o,**j})
-    return res
+        return {"id":b["id"],"brief":b["brief"],"audience":b["audience"],"out":o,**j}
+    with ThreadPoolExecutor(8) as ex: return list(ex.map(one,bs))
 mean=lambda r:sum(x["score"] for x in r)/len(r)
 hist={}; samples=[]; os.makedirs("results",exist_ok=True)
 def save(noise=None):

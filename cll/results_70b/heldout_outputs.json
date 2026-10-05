@@ -1,0 +1,258 @@
+[
+  {
+    "layer": "baseline",
+    "id": "orbit-hr",
+    "brief": "Onboarding software for HR teams at mid-size companies",
+    "audience": "HR managers, 200-1000 employees",
+    "out": "Here is the landing-page hero copy:\n\n**Streamline Your Onboarding Process with Ease**\n\nSimplify new hire onboarding and reduce time-to-productivity for your employees\n\n**Get Started with Our Customized Onboarding Software**\n\nRequest a personalized demo to see how our solution can benefit your HR team.",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the needs of mid-size companies to increase its relevance to the target audience.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "baseline",
+    "id": "fern-vet",
+    "brief": "Neighborhood veterinary clinic with evening hours",
+    "audience": "Dog and cat owners in the area",
+    "out": "**HEADLINE**\nYour Neighborhood Vet, Open Late for Your Convenience\n\n**SUBHEAD**\nGet the care your pet needs, when you need it, with extended evening hours \n\n**CTA**\nBook Your Appointment Today: (555) 123-4567 or Schedule Online",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the unique benefits of the clinic beyond just evening hours to further differentiate it from other veterinary clinics.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "baseline",
+    "id": "quill-edu",
+    "brief": "Online writing course for adult beginners",
+    "audience": "People who want to write but never started",
+    "out": "Here's a possible landing-page hero copy:\n\n**Unleash Your Story**\n\n**Start writing with confidence and clarity**\n\n**Take the first step towards becoming a writer**\n\nEnroll in our online writing course for adult beginners and discover the joy of writing your story.",
+    "score": 4.5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 4
+    },
+    "note": "The copy could be more specific about the benefits of the course and what students can expect to achieve, to better drive the enrollment goal.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "baseline",
+    "id": "mason-solar",
+    "brief": "Residential solar installer, financing available",
+    "audience": "Homeowners with high summer electric bills",
+    "out": "Here is the landing page hero copy:\n\n**Cut Your Energy Bills in Half**\n\nAre you tired of breaking the bank on scorching summer electric bills? Solar energy can bring relief and savings to your wallet.\n\n**Get a Free Quote and Start Saving Today**\n\nTap into the power of the sun and lower your energy costs with our top-notch solar installation services. Financing options available to fit your budget.\n\n**Get Your Free Quote Now**",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better address the audience's concerns about budget.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "lesson_in_context",
+    "id": "orbit-hr",
+    "brief": "Onboarding software for HR teams at mid-size companies",
+    "audience": "HR managers, 200-1000 employees",
+    "out": "HEADLINE: Streamline Your HR Onboarding Process with Ease\n\nSUBHEAD: Simplify new hire paperwork, automate repetitive tasks, and ensure a seamless transition for your team with our intuitive onboarding software.\n\nCTA: Get a Customized Pricing Quote",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific to mid-size companies, which is a key detail from the brief.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "lesson_in_context",
+    "id": "fern-vet",
+    "brief": "Neighborhood veterinary clinic with evening hours",
+    "audience": "Dog and cat owners in the area",
+    "out": "Here is the rewritten landing page hero copy:\n\n**Your Neighborhood Vets, When You Need Us Most**\n\n**Convenient evening hours for a healthier pet**\n\nNo more taking time off work or juggling busy schedules. Our clinic is open late, so you can bring your furry friend in when it's most convenient for you. Our experienced and caring team is here to provide the best possible care for your dog or cat.\n\n**Book an appointment tonight**",
+    "score": 5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy does not have any major weaknesses, but could potentially be improved by adding more specific details about the clinic's services or unique features.",
+    "judge_spread": 0
+  },
+  {
+    "layer": "lesson_in_context",
+    "id": "quill-edu",
+    "brief": "Online writing course for adult beginners",
+    "audience": "People who want to write but never started",
+    "out": "Here is a possible landing page hero copy:\n\n**Start Your Writing Journey Today**\n\n**Take the first step towards becoming a confident writer**\n\n**Enroll Now**\n\nIs fear of not knowing where to start holding you back from sharing your stories, ideas, and thoughts with the world? Our online writing course is designed specifically for adult beginners like you, providing a supportive and structured environment to help you build the writing habit and develop your skills.\n\nDon't let self-doubt or uncertainty hold you back any longer. Join our upcoming cohort and discover a community of like-minded individuals who are eager to start their writing journey. Our expert instructors will guide you through the fundamentals of writing, helping you overcome common obstacles and achieving your writing goals.\n\n**Enroll Now",
+    "score": 5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy effectively avoids making any forbidden claims and stays true to the brand voice, but could potentially be improved with more specific details about the course curriculum or instructor expertise.",
+    "judge_spread": 0
+  },
+  {
+    "layer": "lesson_in_context",
+    "id": "mason-solar",
+    "brief": "Residential solar installer, financing available",
+    "audience": "Homeowners with high summer electric bills",
+    "out": "HEADLINE: Slash Your Summer Electric Bills with Solar Power\n\nSUBHEAD: Get a personalized solar panel installation quote and start saving money on your energy bills today\n\nCTA: Get Your Free Solar Quote Now",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better match the brief's details.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "prompt_rewrite",
+    "id": "orbit-hr",
+    "brief": "Onboarding software for HR teams at mid-size companies",
+    "audience": "HR managers, 200-1000 employees",
+    "out": "Here is a possible landing page hero copy:\n\n**Simplify Your HR Workflow with Ease**\n\nStreamline your onboarding process and reduce administrative burdens with our intuitive software designed specifically for HR teams at mid-size companies.\n\n**Say Goodbye to Manual Data Entry and Long Onboarding Times**\n\nOur software automates and integrates all your onboarding tasks, ensuring a seamless experience for new hires and reduced administrative workload for your team.\n\n**Get Started with Our Pricing Today**",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 4
+    },
+    "note": "The copy does not fully drive the stated goal of requesting pricing, as the CTA could be more direct, such as 'Request a Custom Pricing Quote Today'.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "prompt_rewrite",
+    "id": "fern-vet",
+    "brief": "Neighborhood veterinary clinic with evening hours",
+    "audience": "Dog and cat owners in the area",
+    "out": "Here is a potential landing page hero copy:\n\n**When Your Pet Needs Us Most**\n\nAs a pet owner, you want the best for your furry friend. But sometimes, the best care requires a little extra attention outside of regular business hours. That's why we're here for you.\n\n**Convenient Evening Hours for a Healthier Pet**\n\nOur neighborhood veterinary clinic is open until 7 PM, Monday through Friday, so you can bring your pet in for care after a long day. Our experienced and compassionate team is dedicated to providing top-notch medical care for your dog or cat, whether it's a routine check-up or an unexpected issue that arises.\n\n**Schedule Your Evening Appointment Today**\n\nReady to book a convenient evening appointment? Fill out the form below",
+    "score": 5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy does not have any major weaknesses, but could potentially be improved by adding more specific details about the services offered or the qualifications of the veterinary team.",
+    "judge_spread": 0
+  },
+  {
+    "layer": "prompt_rewrite",
+    "id": "quill-edu",
+    "brief": "Online writing course for adult beginners",
+    "audience": "People who want to write but never started",
+    "out": "Here is a possible landing-page hero copy:\n\n**Start Writing Today**\n\n**Break Free from the Blank Page and Discover the Joy of Creative Expression**\n\n**Enroll Now in Our Life-Changing Online Writing Course for Adult Beginners**",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about what makes the course unique or effective for adult beginners.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "prompt_rewrite",
+    "id": "mason-solar",
+    "brief": "Residential solar installer, financing available",
+    "audience": "Homeowners with high summer electric bills",
+    "out": "Here is the landing page hero copy:\n\n**Cut Your Summer Electricity Bills in Half**\n\n**Say Goodbye to Skyrocketing Energy Costs**\n\nGet a free, no-obligation quote to see how much you can save with solar energy.\n\n**Get Your Free Quote Today**",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better match the brief.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "retrieved_fewshot",
+    "id": "orbit-hr",
+    "brief": "Onboarding software for HR teams at mid-size companies",
+    "audience": "HR managers, 200-1000 employees",
+    "out": "Here is the landing-page hero copy:\n\n**Streamline Your Onboarding Process**\n\n**Simplify New Hire Integration with Our Proven HR Onboarding Platform**\n\n**Get a Customized Pricing Plan for Your Mid-Size Company**",
+    "score": 5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy effectively meets all criteria, but could potentially be improved with more dynamic language to engage the audience.",
+    "judge_spread": 0
+  },
+  {
+    "layer": "retrieved_fewshot",
+    "id": "fern-vet",
+    "brief": "Neighborhood veterinary clinic with evening hours",
+    "audience": "Dog and cat owners in the area",
+    "out": "**Your Neighborhood Veterinary Care, When You Need It Most**\n\n**Convenient Evening Hours for Busy Pet Parents**\n\n**Book Your Appointment Today**",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the services offered by the veterinary clinic to make it more distinctive and tailored to the audience's needs.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "retrieved_fewshot",
+    "id": "quill-edu",
+    "brief": "Online writing course for adult beginners",
+    "audience": "People who want to write but never started",
+    "out": "Here's a possible hero copy:\n\n**Welcome to the Page**\n\n**You've Always Wanted to Write. Now's the Time.**\n\n**Join Our Next Cohort and Start Writing Your Story**\n\n(I tried to create a warm and inviting tone that acknowledges the audience's desire to write, while also emphasizing the opportunity to take action and start their writing journey.)",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the benefits and unique aspects of the online writing course to further differentiate it from other writing courses.",
+    "judge_spread": 0.0
+  },
+  {
+    "layer": "retrieved_fewshot",
+    "id": "mason-solar",
+    "brief": "Residential solar installer, financing available",
+    "audience": "Homeowners with high summer electric bills",
+    "out": "Here's a possible hero copy:\n\n**Save Hundreds on Your Summer Bills**\n\n**Cut Your Energy Costs with a Residential Solar Panel System**\n\n**Get a Free, No-Obligation Quote Today**\n\nLet me know if you'd like me to make any changes!",
+    "score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better match the brief.",
+    "judge_spread": 0.0
+  }
+]

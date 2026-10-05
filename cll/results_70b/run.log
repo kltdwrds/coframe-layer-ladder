@@ -1,0 +1,21 @@
+baseline 0 train=4.88 held=4.71 $0.009
+baseline 1 train=4.77 held=4.75 $0.018
+baseline 2 train=4.32 held=4.75 $0.027
+baseline 3 train=4.71 held=4.69 $0.036
+baseline 4 train=4.62 held=4.69 $0.045
+lesson_in_context 0 train=4.76 held=4.04 $0.009
+lesson_in_context 1 train=4.59 held=4.81 $0.019
+lesson_in_context 2 train=4.68 held=4.75 $0.029
+lesson_in_context 3 train=4.82 held=4.81 $0.038
+lesson_in_context 4 train=4.68 held=4.88 $0.049
+prompt_rewrite 0 train=4.74 held=4.69 $0.009
+prompt_rewrite 1 train=4.68 held=4.69 $0.025
+prompt_rewrite 2 train=4.47 held=4.81 $0.040
+prompt_rewrite 3 train=4.75 held=4.69 $0.056
+prompt_rewrite 4 train=4.72 held=4.81 $0.071
+retrieved_fewshot 0 train=4.55 held=4.75 $0.009
+retrieved_fewshot 1 train=4.49 held=4.75 $0.018
+retrieved_fewshot 2 train=4.81 held=4.73 $0.027
+retrieved_fewshot 3 train=4.65 held=4.75 $0.036
+retrieved_fewshot 4 train=4.64 held=4.81 $0.045
+baseline held-out noise across runs: [4.33, 4.75, 4.62] total $ 0.219 calls 1144

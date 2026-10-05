@@ -1,0 +1,186 @@
+{
+  "history": {
+    "baseline": [
+      {
+        "iter": 0,
+        "train": 4.875,
+        "heldout": 4.708333333333333,
+        "usd_cum": 0.009124126000000007,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 16889
+      },
+      {
+        "iter": 1,
+        "train": 4.770833333333334,
+        "heldout": 4.75,
+        "usd_cum": 0.01830290700000001,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 33979
+      },
+      {
+        "iter": 2,
+        "train": 4.322916666666667,
+        "heldout": 4.75,
+        "usd_cum": 0.02740808700000001,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 50850
+      },
+      {
+        "iter": 3,
+        "train": 4.708333333333334,
+        "heldout": 4.6875,
+        "usd_cum": 0.03632206399999997,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 67368
+      },
+      {
+        "iter": 4,
+        "train": 4.625,
+        "heldout": 4.6875,
+        "usd_cum": 0.045133241999999955,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 83789
+      }
+    ],
+    "lesson_in_context": [
+      {
+        "iter": 0,
+        "train": 4.760416666666666,
+        "heldout": 4.041666666666667,
+        "usd_cum": 0.009122478000000024,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 16769
+      },
+      {
+        "iter": 1,
+        "train": 4.59375,
+        "heldout": 4.8125,
+        "usd_cum": 0.018986213000000023,
+        "update_usd_cum": 8.699899999999733e-05,
+        "tokens_cum": 37004
+      },
+      {
+        "iter": 2,
+        "train": 4.677083333333334,
+        "heldout": 4.75,
+        "usd_cum": 0.028677264,
+        "update_usd_cum": 0.00018182099999999174,
+        "tokens_cum": 57163
+      },
+      {
+        "iter": 3,
+        "train": 4.822916666666667,
+        "heldout": 4.8125,
+        "usd_cum": 0.03833863600000003,
+        "update_usd_cum": 0.00026568199999999625,
+        "tokens_cum": 77695
+      },
+      {
+        "iter": 4,
+        "train": 4.677083333333333,
+        "heldout": 4.875,
+        "usd_cum": 0.04856124100000004,
+        "update_usd_cum": 0.000367510999999994,
+        "tokens_cum": 100622
+      }
+    ],
+    "prompt_rewrite": [
+      {
+        "iter": 0,
+        "train": 4.739583333333334,
+        "heldout": 4.6875,
+        "usd_cum": 0.009208593000000001,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 17024
+      },
+      {
+        "iter": 1,
+        "train": 4.677083333333334,
+        "heldout": 4.6875,
+        "usd_cum": 0.02525831899999996,
+        "update_usd_cum": 0.007057844999999979,
+        "tokens_cum": 48329
+      },
+      {
+        "iter": 2,
+        "train": 4.46875,
+        "heldout": 4.8125,
+        "usd_cum": 0.04033913400000014,
+        "update_usd_cum": 0.01313431700000002,
+        "tokens_cum": 76756
+      },
+      {
+        "iter": 3,
+        "train": 4.75,
+        "heldout": 4.6875,
+        "usd_cum": 0.055563394000000016,
+        "update_usd_cum": 0.019372489000000007,
+        "tokens_cum": 105791
+      },
+      {
+        "iter": 4,
+        "train": 4.71875,
+        "heldout": 4.8125,
+        "usd_cum": 0.07122398299999991,
+        "update_usd_cum": 0.026007855999999926,
+        "tokens_cum": 136328,
+        "accepted": 0,
+        "rejected": 4,
+        "final_prompt": "You write landing-page hero copy. Output exactly: HEADLINE, SUBHEAD, CTA, each on its own line."
+      }
+    ],
+    "retrieved_fewshot": [
+      {
+        "iter": 0,
+        "train": 4.552083333333333,
+        "heldout": 4.75,
+        "usd_cum": 0.008936301000000008,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 16386
+      },
+      {
+        "iter": 1,
+        "train": 4.489583333333334,
+        "heldout": 4.75,
+        "usd_cum": 0.018036882999999893,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 34435
+      },
+      {
+        "iter": 2,
+        "train": 4.8125,
+        "heldout": 4.729166666666667,
+        "usd_cum": 0.027212321000000067,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 52229
+      },
+      {
+        "iter": 3,
+        "train": 4.645833333333334,
+        "heldout": 4.75,
+        "usd_cum": 0.03631319100000013,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 70319
+      },
+      {
+        "iter": 4,
+        "train": 4.635416666666666,
+        "heldout": 4.8125,
+        "usd_cum": 0.045214979000000155,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 87975
+      }
+    ]
+  },
+  "baseline_noise": [
+    4.333333333333333,
+    4.75,
+    4.625
+  ],
+  "total_usd": 0.2188744289999999,
+  "total_tokens": 425717,
+  "calls": 1144,
+  "gen_model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+  "judge_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "judge_n": 3
+}

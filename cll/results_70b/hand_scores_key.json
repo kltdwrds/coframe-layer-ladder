@@ -1,0 +1,112 @@
+{
+  "0": {
+    "layer": "retrieved_fewshot",
+    "judge_score": 5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy effectively meets all criteria, but could potentially be improved with more dynamic language to engage the audience."
+  },
+  "1": {
+    "layer": "retrieved_fewshot",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better match the brief."
+  },
+  "2": {
+    "layer": "lesson_in_context",
+    "judge_score": 5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy effectively avoids making any forbidden claims and stays true to the brand voice, but could potentially be improved with more specific details about the course curriculum or instructor expertise."
+  },
+  "3": {
+    "layer": "baseline",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the needs of mid-size companies to increase its relevance to the target audience."
+  },
+  "4": {
+    "layer": "lesson_in_context",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific to mid-size companies, which is a key detail from the brief."
+  },
+  "5": {
+    "layer": "prompt_rewrite",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 5,
+      "claim_safety": 5,
+      "goal_fit": 4
+    },
+    "note": "The copy does not fully drive the stated goal of requesting pricing, as the CTA could be more direct, such as 'Request a Custom Pricing Quote Today'."
+  },
+  "6": {
+    "layer": "lesson_in_context",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better match the brief's details."
+  },
+  "7": {
+    "layer": "retrieved_fewshot",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the services offered by the veterinary clinic to make it more distinctive and tailored to the audience's needs."
+  },
+  "8": {
+    "layer": "prompt_rewrite",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better match the brief."
+  },
+  "9": {
+    "layer": "baseline",
+    "judge_score": 4.75,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 4,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy could be more specific about the financing options available to better address the audience's concerns about budget."
+  }
+}

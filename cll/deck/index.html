@@ -43,7 +43,7 @@
       <div class="stat"><strong><span data-k="cost_total|usd" data-pending="under $4"></span> total</strong>Run 1 <span data-k="run1.total_usd|usd"></span>, run 2 <span data-k="run2.total_usd|usd" data-pending="(running)"></span>, calibration <span data-k="calib_usd|usd"></span>, controls <span data-k="addons_usd|usd"></span>, one aborted attempt <span data-k="aborted_usd|usd"></span></div>
     </div>
   </div>
-  <p class="foot">Code and every artifact: <code>cll/</code> in the repo. Run 1: <span data-k="run1.calls|int"></span> model calls, all successful; the AI Gateway log (which also holds the calibration calls) joins back to every one. Scale is small on purpose: this design can only detect a lift of about <span data-k="run1.mde80"></span>–<span data-k="run2.mde80"></span> points.</p>
+  <p class="foot">Code and every artifact: <a href="https://github.com/kltdwrds/coframe-layer-ladder" target="_blank" rel="noopener">github.com/kltdwrds/coframe-layer-ladder</a>. Run 1: <span data-k="run1.calls|int"></span> model calls, all successful; the AI Gateway log (which also holds the calibration calls) joins back to every one. Scale is small on purpose: this design can only detect a lift of about <span data-k="run1.mde80"></span>–<span data-k="run2.mde80"></span> points.</p>
 </section>
 
 <!-- 3 -->
@@ -194,6 +194,7 @@
 <!-- 11 -->
 <section class="slide" aria-roledescription="slide" aria-label="11: Reproduce it">
   <h2>Reproduce it</h2>
+  <p class="lead">Code, data, traces and the write-up: <a href="https://github.com/kltdwrds/coframe-layer-ladder" target="_blank" rel="noopener">github.com/kltdwrds/coframe-layer-ladder</a></p>
   <ol class="steps">
     <li><span>Put <code>CF_ACCOUNT_ID</code>, <code>CF_GATEWAY_NAME</code> and <code>CF_API_TOKEN</code> in <code>cll/.env</code>.</span></li>
     <li><span><code>./run.sh --dry</code> prints calls, dollars and neurons without spending anything.</span></li>

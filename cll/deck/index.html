@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The judge was the ceiling</title>
+<meta name="description" content="A one-night run of the cheapest-layer ladder: three places to store a lesson, two judges, and what the evaluator did to the result.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<main class="deck" id="deck" aria-roledescription="slide deck" aria-label="The judge was the ceiling">
+
+<!-- 1 -->
+<section class="slide title-slide" aria-roledescription="slide" aria-label="1: Title">
+  <div>
+    <h1>The judge was the ceiling</h1>
+    <p class="subtitle">A one-night run of the cheapest-layer ladder: three places to store a lesson, two judges, and what the evaluator did to the result</p>
+    <p class="byline">Kyle, for Coframe, October 2026 · companion to <a href="https://qyvr.dev/@kyle/coframe-harness-notes" target="_blank" rel="noopener">Learn where labels are cheap</a></p>
+  </div>
+  <figure class="chart-box" style="margin:0">
+    <div class="legend"><span><i class="dot k-good" style="background:var(--arm-b)"></i>good copy</span><span><i class="dot" style="background:var(--arm-a)"></i>plausible but generic</span><span><i class="dot" style="background:var(--arm-c)"></i>planted defect</span></div>
+    <div data-chart="strip-title"></div>
+  </figure>
+</section>
+
+<!-- 2 -->
+<section class="slide" aria-roledescription="slide" aria-label="2: What I ran">
+  <h2>What I ran</h2>
+  <div class="cols">
+    <ul class="points">
+      <li>A generator writes a headline, subhead and CTA for a site brief: audience, goal, voice, and claims it must not make.</li>
+      <li>12 synthetic briefs: 8 train, 4 held-out. Held-out briefs never reach an update step, and were not used to choose the judge.</li>
+      <li>The generator is deliberately cheap (Llama 3.1 8B) so there is room to improve. Everything runs on Cloudflare Workers AI through AI Gateway, and every request is tagged so the gateway log joins back to the run.</li>
+      <li>A rubric judge scores brand fit, specificity, claim safety and goal fit, 1–5 each, at temperature 0.</li>
+    </ul>
+    <div class="stats">
+      <div class="stat"><strong>3 layers + baseline</strong>4 learning iterations each, scored on train and held-out after every one</div>
+      <div class="stat"><strong>2 full runs</strong>Same generator and code; only the judge changes</div>
+      <div class="stat"><strong><span data-k="cost_total|usd" data-pending="under $4"></span> total</strong>Run 1 <span data-k="run1.total_usd|usd"></span>, run 2 <span data-k="run2.total_usd|usd" data-pending="(running)"></span>, judge calibration <span data-k="calib_usd|usd"></span>, one aborted attempt <span data-k="aborted_usd|usd"></span></div>
+    </div>
+  </div>
+  <p class="foot">Code and every artifact: <code>cll/</code> in the repo. Run 1: <span data-k="run1.calls|int"></span> model calls; the AI Gateway trace for it has 1,281 entries with zero errors.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide" aria-roledescription="slide" aria-label="3: Three places to put a lesson">
+  <h2>Three places to put a lesson</h2>
+  <p class="lead">The ladder from the first deck, at miniature scale. Each layer sees only train results.</p>
+  <div class="table-wrap">
+  <table class="layers">
+    <thead><tr><th>Layer</th><th>After each train pass</th><th>Extra model calls per update</th><th>Deck analogue</th></tr></thead>
+    <tbody>
+      <tr><td><span style="color:var(--arm-a)">●</span> Lesson in context</td><td>Distil the three worst outputs and their judge notes into one lesson; prepend recent lessons to the prompt</td><td>1 cheap call</td><td>Memory (ACE)</td></tr>
+      <tr><td><span style="color:var(--arm-c)">●</span> Prompt rewrite</td><td>Propose a new system prompt from the failures; keep it only if it beats the incumbent on the same train pass</td><td>1 call + a full train re-score</td><td>Prompts (GEPA)</td></tr>
+      <tr><td><span style="color:var(--arm-b)">●</span> Retrieved few-shot</td><td>Bank train outputs scoring ≥ 4.0; retrieve the two most similar as examples</td><td>none</td><td>Retrieval of past wins</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="foot">Baseline gets three extra held-out runs. Pooled with every layer's iteration 0 (same prompt), they give the noise band on the next slides.</p>
+</section>
+
+<!-- 4 -->
+<section class="slide" aria-roledescription="slide" aria-label="4: Run 1, the free-tier judge">
+  <h2>Run 1: the free-tier judge saw almost nothing to fix</h2>
+  <div class="cols chart-right">
+    <div>
+      <p>Baseline copy scored <span data-k="run1.mu"></span> of 5 on held-out briefs, before any learning.</p>
+      <p>Three layers end just above the noise band, by 0.06–0.13, on one four-brief draw. The band's lower edge is a single unlucky base-prompt run.</p>
+      <p class="note">The judge gave 5.0 to copy with a preamble, markdown and five lines where three were asked for. Nothing in the rubric covered format, so the judge did as it was told.</p>
+    </div>
+    <figure class="chart-box" style="margin:0">
+      <div class="legend"><span><i class="dash"></i>Baseline</span><span><i style="background:var(--arm-a)"></i>Lesson</span><span><i style="background:var(--arm-c)"></i>Rewrite</span><span><i style="background:var(--arm-b)"></i>Few-shot</span><span><i class="band"></i>noise</span></div>
+      <p class="chart-sub">Held-out judge score, llama-3.3-70b judge</p>
+      <div data-chart="line1"></div>
+    </figure>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide" aria-roledescription="slide" aria-label="5: Test the judge before trusting it">
+  <h2>So I tested the judges before trusting one</h2>
+  <div class="cols chart-right">
+    <ul class="points">
+      <li>16 hand-written items on train briefs: 5 good, 7 with one planted defect, 4 plausible but generic.</li>
+      <li>Every judge caught all 7 defects. They differ on the generic copy: the 70B gave it 3.56, DeepSeek 2.50.</li>
+      <li>The 70B's temperature-0 repeats were identical on all 16 items, so averaging three runs bought nothing. DeepSeek varied on 9 of 16, so averaging does reduce noise there.</li>
+    </ul>
+    <figure class="chart-box" style="margin:0">
+      <div class="legend"><span><i class="dot" style="background:var(--arm-b)"></i>good</span><span><i class="dot" style="background:var(--arm-a)"></i>generic</span><span><i class="dot" style="background:var(--arm-c)"></i>defect</span></div>
+      <div data-chart="strip"></div>
+    </figure>
+  </div>
+  <p class="foot">This is idea 3 from the first deck at its smallest: measure the judge's lean on items whose answer you know. I wrote these labels, so it is a sanity check; the hand scores (slide 8) are the independent test.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide" aria-roledescription="slide" aria-label="6: Run 2, a judge that leaves room">
+  <h2>Run 2: a judge that leaves room to improve</h2>
+  <div class="cols chart-right">
+    <div>
+      <p>Same generator, same code. Baseline drops to <span data-k="run2.mu" data-pending="about 3.6"></span>, so there is headroom to measure.</p>
+      <div class="vs" data-if="run2">
+        <div class="stat"><span class="big" data-k="run2.layers.lesson_in_context.gain|sign"></span>Lesson in context</div>
+        <div class="stat b"><span class="big" data-k="run2.layers.retrieved_fewshot.gain|sign"></span>Retrieved few-shot</div>
+      </div>
+      <p data-if="run2" class="muted">Gain in final held-out score over the pooled base-prompt mean. Noise range: <span data-k="run2.lo"></span>–<span data-k="run2.hi"></span>.</p>
+    </div>
+    <figure class="chart-box" style="margin:0">
+      <div class="legend"><span><i class="dash"></i>Baseline</span><span><i style="background:var(--arm-a)"></i>Lesson</span><span><i style="background:var(--arm-c)"></i>Rewrite</span><span><i style="background:var(--arm-b)"></i>Few-shot</span><span><i class="band"></i>noise</span></div>
+      <p class="chart-sub">Held-out judge score, deepseek-v4-pro judge</p>
+      <div data-chart="line2"></div>
+    </figure>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide" aria-roledescription="slide" aria-label="7: Gain against noise and cost">
+  <h2>Gain against noise, and what it cost</h2>
+  <div class="cols chart-right">
+    <ul class="points">
+      <li>Bars are final held-out gain over the base-prompt mean; the grey band is the noise range for that judge.</li>
+      <li>Learning cost counts only update calls, not evaluation, which every layer pays equally.</li>
+      <li>Few-shot retrieval costs nothing to learn. Prompt rewrite pays for a full train re-score each time; its 8B reflector got <span data-k="run1.layers.prompt_rewrite.accepted|int"></span> of 4 candidates accepted under the 70B judge and <span data-k="run2.layers.prompt_rewrite.accepted|int" data-pending="(pending)"></span> under DeepSeek.</li>
+    </ul>
+    <figure class="chart-box" style="margin:0"><div data-chart="gain"></div></figure>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide" aria-roledescription="slide" aria-label="8: Judge against a person">
+  <h2>Does the judge agree with a person?</h2>
+  <div class="cols even">
+    <div>
+      <p>Ten held-out outputs from run 2, scored by hand on the same rubric without seeing any judge score, then scored by both judges.</p>
+      <p data-unless="agree" class="muted">Pending: hand scores go in next.</p>
+      <div data-if="agree" id="agree-stats"></div>
+    </div>
+    <figure class="chart-box" style="margin:0"><div data-chart="scatter"></div></figure>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide" aria-roledescription="slide" aria-label="9: What failed">
+  <h2>What failed</h2>
+  <div class="findings-head"><span>What happened</span><span>What it means</span></div>
+  <div class="findings">
+    <div class="finding"><p class="saw">Prompt rewrite accepted 0 of 4 candidates in run 1. The 8B reflector returned hero copy instead of a prompt, or prompts locked to one train brief.</p><p class="means">A reflective edit needs a reflector stronger than the model it edits. The accept-only-if-better gate was the only thing preventing harm.</p></div>
+    <div class="finding"><p class="saw">Asked for "ONE short lesson", the distiller wrote numbered lists with preambles.</p><p class="means">Cheap models ignore output contracts. Parse and enforce them; don't trust them.</p></div>
+    <div class="finding"><p class="saw">Under the lenient judge, all 8 train outputs cleared the few-shot bar, format-breaking ones included.</p><p class="means">Judge leniency flows straight into what the loop learns from, not only into the score.</p></div>
+    <div class="finding"><p class="saw">The rubric had no format criterion, and the judge rewarded broken layouts with 5.0.</p><p class="means">The evaluator caps the loop at the rubric too, not just at the model.</p></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide" aria-roledescription="slide" aria-label="10: What this suggests for Coframe">
+  <h2>What this suggests for Coframe's loop</h2>
+  <div class="route">
+    <div class="lesson">The cheap judge passes generic copy</div><div class="to">→</div><div class="home idea">Calibrate on known-answer items before every judge or model swap</div>
+    <div class="lesson">Repeats at temperature 0 were copies</div><div class="to">→</div><div class="home idea">Get independence from different judges and data, not repeated calls</div>
+    <div class="lesson">The rewriter could not rewrite</div><div class="to">→</div><div class="home idea">Put the strong model in the reflector, the cheap one in the generator</div>
+    <div class="lesson">Approve/reject labels arrive in minutes</div><div class="to">→</div><div class="home idea">Use them as the calibration set for brand fit</div>
+  </div>
+  <p class="foot">Small scale: 12 briefs, one generator, synthetic data. The direction matches the first deck; the magnitudes should not be quoted.</p>
+</section>
+
+<!-- 11 -->
+<section class="slide" aria-roledescription="slide" aria-label="11: Reproduce it">
+  <h2>Reproduce it</h2>
+  <ol class="steps">
+    <li><span>Put <code>CF_ACCOUNT_ID</code>, <code>CF_GATEWAY_NAME</code> and <code>CF_API_TOKEN</code> in <code>cll/.env</code>.</span></li>
+    <li><span><code>./run.sh --dry</code> prints calls, dollars and neurons without spending anything.</span></li>
+    <li><span><code>JUDGE_MODEL=@cf/deepseek-ai/deepseek-v4-pro-0813 ./run.sh --judge-n 2</code> runs everything: plot, gain table, edit log, blind hand-score sheet and gateway trace.</span></li>
+    <li><span><code>python -m ladder.calibrate MODEL…</code> tests a judge before you trust it.</span></li>
+  </ol>
+  <div class="success"><strong>Held-out discipline:</strong> held-out briefs never reach <code>update()</code>, the judge choice or the calibration set.</div>
+</section>
+
+</main>
+<nav class="controls" aria-label="Slide navigation">
+  <button type="button" id="prev" aria-label="Previous slide">Back</button>
+  <span id="count" aria-live="polite">1 of 11</span>
+  <button type="button" id="next" aria-label="Next slide">Next</button>
+</nav>
+<script src="data.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

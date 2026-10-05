@@ -1,0 +1,278 @@
+{
+  "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "n": 3,
+  "rows": [
+    {
+      "layer": "baseline",
+      "id": "orbit-hr",
+      "out": "Here is a sample landing-page hero copy:\n\n**Streamline Your Onboarding Process with Ease**\n\n**Transform Your New Hire Experience and Reduce Time-to-Productivity**\n\nSay goodbye to disorganization and hello to a seamless onboarding process. Our onboarding software is designed to simplify the transition for both new hires and HR teams, saving you time and resources.\n\n**Get Started Today and Request a Customized Pricing Quote**",
+      "score": 3.125,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific to mid-size companies, which is a key detail from the brief.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "baseline",
+      "id": "fern-vet",
+      "out": "Here's a possible landing-page hero copy:\n\n**HEADLINE**\nCompassionate Care for Your Furry Friends, When You Need It\n\n**SUBHEAD**\nGet expert veterinary care for your dog or cat, even on a busy schedule. Our evening hours ensure you can prioritize your pet's health, without compromising your work or family time.\n\n**CTA**\nBook an appointment today and give your pet the care they deserve, from the comfort of your own neighborhood.",
+      "score": 4.625,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the unique aspects of the clinic, such as mentioning the neighborhood name or specific evening hours.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "baseline",
+      "id": "quill-edu",
+      "out": "Here is the landing-page hero copy:\n\n**Start Writing Your Story**\n\n**You have a story to tell, and the world wants to hear it.**\n\n**Enroll in our upcoming cohort today and discover the joy of writing for yourself**\n\n**Get started now**",
+      "score": 4,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the course details to make it more unique to the business.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "baseline",
+      "id": "mason-solar",
+      "out": "Here is the landing page hero copy:\n\n**Save Thousands on Your Summer Bills**\n\n**Cut Your Energy Costs in Half with Solar Power**\n\nGet a Free Quote and Start Saving Today",
+      "score": 3.625,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the financing options available to better match the brief.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "orbit-hr",
+      "out": "Here is the hero copy:\n\n**Streamline Your Onboarding Process with Ease**\n\nAttract and retain top talent with a seamless onboarding experience that sets your company up for long-term success.\n\n**Say goodbye to disorganized paperwork and tedious checklists. Our onboarding software is specifically designed to help HR teams at mid-size companies efficiently onboard new hires, reduce time-to-productivity, and boost employee satisfaction.**\n\n**Get Started with Our Customized Solution**\n\n Request a pricing quote to learn how our onboarding software can help your team streamline processes, increase engagement, and drive business growth.",
+      "score": 3.125,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 5,
+          "claim_safety": 4,
+          "goal_fit": 5
+        },
+        "note": "The copy comes close to making a forbidden claim with 'Say goodbye to disorganized paperwork', which may be perceived as implying the elimination of all paperwork.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "fern-vet",
+      "out": "Here is the landing page hero copy:\n\n**HEADLINE**\nTrusted Care for Your Furry Family Members, Even When Your Schedule Isn't Flexible\n\n**SUBHEAD**\nAt [Clinic Name], we understand that your pets are more than just animals - they're part of the family. That's why we offer evening hours to accommodate your busy schedule and provide top-notch care for your furry friends.\n\n**CTA**\nBook an Appointment Today and Let Us Show You the Difference We Can Make in Your Pet's Life!",
+      "score": 3.375,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific by mentioning the clinic's name and the exact evening hours to add more concrete details.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "quill-edu",
+      "out": "Here is the rewritten hero copy:\n\n**Headline:** Unlock Your Story: Learn to Write with Confidence\n\n**Subhead:** Discover the joy of writing and unlock your creative potential with our supportive online course for adult beginners\n\n**CTA:** Enroll Now in Our Next Cohort and Start Writing Your Story Today",
+      "score": 4.375,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about what sets the online course apart from other writing courses for adult beginners.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "lesson_in_context",
+      "id": "mason-solar",
+      "out": "HEADLINE: Lower Your Summer Bills with a Custom Solar Solution\n\nSUBHEAD: Get a free, personalized quote for a solar panel system that fits your home and budget\n\nCTA: Get Your Free Quote",
+      "score": 4.5,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the financing options available to better match the brief.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "orbit-hr",
+      "out": "Here is a possible landing-page hero copy:\n\n**Headline:** Streamline Your Onboarding Process with Ease\n\n**Subhead:** Get started with our intuitive onboarding software, designed to reduce new hire time-to-productivity by up to 30% and increase first-day engagement by 25%. Our platform automates routine tasks, provides personalized onboarding workflows, and integrates seamlessly with your existing HR tools.\n\n**CTA:** Get a Customized Pricing Quote for Your Business\n\nThis headline and subhead aim to:\n\n* Clearly communicate the benefit of using the onboarding software\n* Provide a specific, measurable improvement (30% reduction in new hire time-to-productivity, 25% increase in first-day engagement)\n* Highlight the unique features and benefits",
+      "score": 3.25,
+      "other": {
+        "score": 5,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 5,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy does not have any major weaknesses, but could potentially be improved by adding more specific details about the target audience, such as referencing mid-size companies directly.",
+        "judge_spread": 0
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "fern-vet",
+      "out": "Here's a potential landing-page hero copy:\n\n**Headline:** Your Neighborhood Vet, When It Matters Most\n\n**Subhead:** Get personalized care after hours and on your schedule, with our flexible evening appointments and experienced team dedicated to your furry friend's well-being.\n\n**Call-to-Action (CTA):** Book an Evening Appointment Today\n\nThis copy aims to resonate with dog and cat owners in the area by:\n\n* Emphasizing the clinic's evening hours, which cater to their busy schedules and lives\n* Highlighting the personalized care and attention their pets will receive from the experienced team\n* Using a conversational tone that feels caring and approachable, rather than making grand or unverifiable claims\n\nBy avoiding absolute claims and instead focusing",
+      "score": 4.25,
+      "other": {
+        "score": 5,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 5,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy's biggest weakness is that it may benefit from adding more unique details about the clinic to further differentiate it from other veterinary services.",
+        "judge_spread": 0
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "quill-edu",
+      "out": "Here's a potential landing-page hero copy:\n\n**Headline:** Unlock Your Story, Unleash Your Voice\n\n**Subhead:** Start writing with confidence and clarity, no experience necessary. Join our supportive community and learn to craft compelling stories that spark connection and meaning.\n\n**Call-to-Action (CTA):** Join the waitlist for our next cohort and get instant access to our free introductory video series.\n\nThis approach avoids making absolute claims that might undermine trustworthiness, and instead focuses on the benefits of joining the course. The subhead highlights the unique aspects of the course, such as the emphasis on community and the focus on crafting compelling stories. The CTA encourages visitors to take the next step without committing to a long-term decision.",
+      "score": 3.75,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be improved by adding more specific details about the course, such as the topics covered or the expertise of the instructors, to make it more distinctive and compelling.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "prompt_rewrite",
+      "id": "mason-solar",
+      "out": "Here's a possible landing-page hero copy:\n\n**Headline:** Save Thousands on Your Summer Bills with Solar Power\n\n**Subhead:** Get a customized solar panel installation plan tailored to your home's energy needs, with financing options to fit your budget.\n\n**Call-to-Action (CTA):** Get a free, no-obligation quote today!\n\nThis headline is straightforward and focuses on the key benefit of saving money on summer bills. The subhead provides a clear and concrete idea of what the product offers, while avoiding making absolute claims that may undermine trustworthiness. The CTA is simple and encourages the visitor to take action.",
+      "score": 4.0,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the financing options to further tailor the message to the audience's concerns about budget.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "orbit-hr",
+      "out": "Here is the landing-page hero copy:\n\n**Streamline Your Onboarding Process**\n\n**Effortlessly integrate new hires and reduce turnover risk**\n\nSay goodbye to lengthy onboarding processes and hello to a more productive team. Our software is designed to simplify the hiring process, reduce paperwork, and get new employees up to speed in no time.\n\n**Get a personalized pricing quote today**",
+      "score": 2.875,
+      "other": {
+        "score": 4.416666666666667,
+        "criteria": {
+          "brand_fit": 4.666666666666667,
+          "specificity": 4,
+          "claim_safety": 4,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific to mid-size companies and HR teams to increase its specificity score.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "fern-vet",
+      "out": "Here's a possible landing-page hero copy:\n\n**Your Pet's Health, Our Top Priority**\n\n**Care for your furry friend, any time of day**\n\nAs a pet owner, you know how much love and care your dog or cat brings to your life. But life can get busy, and it's not always easy to find time to get your pet to the vet during the day. That's why we're here for you, with evening hours and a caring team dedicated to keeping your pet healthy and happy.\n\n**Book an appointment today and let us take care of your pet's needs**",
+      "score": 3.375,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the unique benefits of the neighborhood veterinary clinic, such as its location or community involvement.",
+        "judge_spread": 0.0
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "quill-edu",
+      "out": "**Unlock Your Story**\n\n**Start writing with confidence and clarity**\n\nDo you have a story to tell, but don't know where to begin? You're not alone. Many of us have ideas simmering in our minds, but struggle to put them into words. Our online writing course is here to help you overcome the fear and doubt that's holding you back.\n\n**Join our next cohort and start writing your way**\n\n(Where \"writing your way\" is a verb, e.g. \"writingyourway.com/cohort\" or a button that says \"Enroll Now\")",
+      "score": 4,
+      "other": {
+        "score": 4.666666666666667,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 4.666666666666667
+        },
+        "note": "The copy could be more specific about the course details, such as what students can expect to learn or achieve, to make it more distinctive and compelling.",
+        "judge_spread": 0.25
+      }
+    },
+    {
+      "layer": "retrieved_fewshot",
+      "id": "mason-solar",
+      "out": "Here is a possible landing-page hero copy:\n\n**Save Thousands on Your Electricity Bill**\n\n**Cut your energy costs without the upfront costs**\n\nHigh summer bills got you down? You're not alone. Many homeowners struggle with expensive electricity bills, especially during the hot summer months. Our team can help you switch to solar energy and start saving money today.\n\n**Get a free quote and start powering your home for less**",
+      "score": 3.5,
+      "other": {
+        "score": 4.75,
+        "criteria": {
+          "brand_fit": 5,
+          "specificity": 4,
+          "claim_safety": 5,
+          "goal_fit": 5
+        },
+        "note": "The copy could be more specific about the financing options available to better match the brief.",
+        "judge_spread": 0.0
+      }
+    }
+  ]
+}

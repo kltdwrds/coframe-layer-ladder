@@ -1,0 +1,186 @@
+{
+  "history": {
+    "baseline": [
+      {
+        "iter": 0,
+        "train": 3.859375,
+        "heldout": 3.5,
+        "usd_cum": 0.11385773599999999,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 37115
+      },
+      {
+        "iter": 1,
+        "train": 3.703125,
+        "heldout": 3.75,
+        "usd_cum": 0.22474368700000003,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 73173
+      },
+      {
+        "iter": 2,
+        "train": 3.46875,
+        "heldout": 3.75,
+        "usd_cum": 0.33088980199999996,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 107895
+      },
+      {
+        "iter": 3,
+        "train": 3.640625,
+        "heldout": 3.75,
+        "usd_cum": 0.440620927,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 143751
+      },
+      {
+        "iter": 4,
+        "train": 3.546875,
+        "heldout": 3.84375,
+        "usd_cum": 0.5625032820000001,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 182617
+      }
+    ],
+    "lesson_in_context": [
+      {
+        "iter": 0,
+        "train": 3.671875,
+        "heldout": 3.53125,
+        "usd_cum": 0.11371717899999978,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 36786
+      },
+      {
+        "iter": 1,
+        "train": 3.921875,
+        "heldout": 3.4375,
+        "usd_cum": 0.22302882300000004,
+        "update_usd_cum": 9.29600000000308e-05,
+        "tokens_cum": 74598
+      },
+      {
+        "iter": 2,
+        "train": 3.953125,
+        "heldout": 3.6875,
+        "usd_cum": 0.33934046800000006,
+        "update_usd_cum": 0.00016572599999997717,
+        "tokens_cum": 114780
+      },
+      {
+        "iter": 3,
+        "train": 3.78125,
+        "heldout": 3.6875,
+        "usd_cum": 0.4598215290000002,
+        "update_usd_cum": 0.00024767500000000275,
+        "tokens_cum": 157360
+      },
+      {
+        "iter": 4,
+        "train": 3.90625,
+        "heldout": 3.84375,
+        "usd_cum": 0.5716902180000006,
+        "update_usd_cum": 0.0003369870000000663,
+        "tokens_cum": 199346
+      }
+    ],
+    "prompt_rewrite": [
+      {
+        "iter": 0,
+        "train": 3.75,
+        "heldout": 3.75,
+        "usd_cum": 0.13061180600000033,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 41278
+      },
+      {
+        "iter": 1,
+        "train": 3.796875,
+        "heldout": 3.375,
+        "usd_cum": 0.36309482900000045,
+        "update_usd_cum": 0.07977809000000002,
+        "tokens_cum": 114964
+      },
+      {
+        "iter": 2,
+        "train": 3.515625,
+        "heldout": 3.65625,
+        "usd_cum": 0.5629052180000005,
+        "update_usd_cum": 0.14939913199999988,
+        "tokens_cum": 179838
+      },
+      {
+        "iter": 3,
+        "train": 3.9375,
+        "heldout": 4.0,
+        "usd_cum": 0.7988624679999994,
+        "update_usd_cum": 0.24308871699999957,
+        "tokens_cum": 257461
+      },
+      {
+        "iter": 4,
+        "train": 3.9375,
+        "heldout": 3.8125,
+        "usd_cum": 1.012624204999999,
+        "update_usd_cum": 0.32595567699999917,
+        "tokens_cum": 329939,
+        "accepted": 1,
+        "rejected": 3,
+        "final_prompt": "Here is the rewritten prompt:\n\nWrite a landing-page hero copy that includes a headline, subhead, and CTA. Ensure that the headline and subhead avoid making absolute, unverifiable claims that may undermine trustworthiness. Provide concrete and unique details in the subhead that differentiate your product from competitors."
+      }
+    ],
+    "retrieved_fewshot": [
+      {
+        "iter": 0,
+        "train": 3.71875,
+        "heldout": 3.46875,
+        "usd_cum": 0.13148277699999955,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 41534
+      },
+      {
+        "iter": 1,
+        "train": 3.84375,
+        "heldout": 3.5,
+        "usd_cum": 0.25131494299999924,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 82859
+      },
+      {
+        "iter": 2,
+        "train": 3.96875,
+        "heldout": 3.875,
+        "usd_cum": 0.3812682899999995,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 126799
+      },
+      {
+        "iter": 3,
+        "train": 3.796875,
+        "heldout": 3.8125,
+        "usd_cum": 0.5153200089999985,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 171854
+      },
+      {
+        "iter": 4,
+        "train": 3.78125,
+        "heldout": 3.4375,
+        "usd_cum": 0.6383426119999984,
+        "update_usd_cum": 0.0,
+        "tokens_cum": 214147
+      }
+    ]
+  },
+  "baseline_noise": [
+    3.8125,
+    3.84375,
+    3.3125
+  ],
+  "total_usd": 2.8973556839999968,
+  "total_tokens": 962631,
+  "calls": 861,
+  "gen_model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+  "judge_model": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+  "judge_n": 2
+}

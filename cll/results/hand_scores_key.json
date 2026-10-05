@@ -1,0 +1,112 @@
+{
+  "0": {
+    "layer": "retrieved_fewshot",
+    "judge_score": 2.88,
+    "criteria": {
+      "brand_fit": 3,
+      "specificity": 1.5,
+      "claim_safety": 3,
+      "goal_fit": 4
+    },
+    "note": "The copy is generic and lacks concrete details from the brief, so it could apply to any onboarding software."
+  },
+  "1": {
+    "layer": "retrieved_fewshot",
+    "judge_score": 3.5,
+    "criteria": {
+      "brand_fit": 4,
+      "specificity": 2,
+      "claim_safety": 3,
+      "goal_fit": 5
+    },
+    "note": "The copy is generic and could apply to any solar installer, lacking concrete details like financing terms or local specifics."
+  },
+  "2": {
+    "layer": "lesson_in_context",
+    "judge_score": 4.38,
+    "criteria": {
+      "brand_fit": 4.5,
+      "specificity": 3,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The copy is generic and lacks unique course or brand details, so it could be pasted onto any online writing course for adult beginners."
+  },
+  "3": {
+    "layer": "baseline",
+    "judge_score": 3.12,
+    "criteria": {
+      "brand_fit": 3,
+      "specificity": 2,
+      "claim_safety": 3.5,
+      "goal_fit": 4
+    },
+    "note": "The copy is too generic and could apply to any onboarding software, lacking concrete details about mid-size HR teams or 200\u20131000 employee needs."
+  },
+  "4": {
+    "layer": "lesson_in_context",
+    "judge_score": 3.12,
+    "criteria": {
+      "brand_fit": 3,
+      "specificity": 2,
+      "claim_safety": 3,
+      "goal_fit": 4.5
+    },
+    "note": "The copy relies on generic benefits and lacks concrete, differentiating details, so it could apply to many onboarding tools."
+  },
+  "5": {
+    "layer": "prompt_rewrite",
+    "judge_score": 3.25,
+    "criteria": {
+      "brand_fit": 4,
+      "specificity": 3,
+      "claim_safety": 2,
+      "goal_fit": 4
+    },
+    "note": "The biggest weakness is the use of specific, unsubstantiated performance metrics (30% and 25%) that could be unverifiable claims."
+  },
+  "6": {
+    "layer": "lesson_in_context",
+    "judge_score": 4.5,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 3,
+      "claim_safety": 5,
+      "goal_fit": 5
+    },
+    "note": "The biggest weakness is that the copy is generic and omits the financing angle, so it could apply to almost any solar installer."
+  },
+  "7": {
+    "layer": "retrieved_fewshot",
+    "judge_score": 3.38,
+    "criteria": {
+      "brand_fit": 4.5,
+      "specificity": 2.5,
+      "claim_safety": 2.5,
+      "goal_fit": 4
+    },
+    "note": "The phrase \"any time of day\" overpromises availability beyond the stated evening hours, creating an unverifiable absolute claim."
+  },
+  "8": {
+    "layer": "prompt_rewrite",
+    "judge_score": 4.0,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 2.5,
+      "claim_safety": 3.5,
+      "goal_fit": 5
+    },
+    "note": "The copy is generic and could be pasted onto any solar installer, lacking concrete details that tie it to this specific business."
+  },
+  "9": {
+    "layer": "baseline",
+    "judge_score": 3.62,
+    "criteria": {
+      "brand_fit": 5,
+      "specificity": 2.5,
+      "claim_safety": 2,
+      "goal_fit": 5
+    },
+    "note": "The headline and subhead make unverifiable absolute savings claims ('Save Thousands', 'Cut in Half') that could be considered unsafe."
+  }
+}

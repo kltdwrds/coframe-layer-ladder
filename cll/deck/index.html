@@ -54,13 +54,13 @@
   <table class="layers">
     <thead><tr><th>Layer</th><th>After each train pass</th><th>Extra model calls per update</th><th>Deck analogue</th></tr></thead>
     <tbody>
-      <tr><td><span style="color:var(--arm-a)">●</span> Lesson in context</td><td>Distil the three worst outputs and their judge notes into one lesson; prepend recent lessons to the prompt</td><td>1 cheap call</td><td>Memory (ACE)</td></tr>
-      <tr><td><span style="color:var(--arm-c)">●</span> Prompt rewrite</td><td>Propose a new system prompt from the failures; keep it only if it beats the incumbent on the same train pass</td><td>1 call + a full train re-score</td><td>Prompts (GEPA)</td></tr>
+      <tr><td><span style="color:var(--arm-a)">●</span> Lesson in context</td><td>Distil the three worst outputs and their judge notes into one lesson; prepend recent lessons to the prompt</td><td>1 cheap call</td><td>Memory (ACE-like)</td></tr>
+      <tr><td><span style="color:var(--arm-c)">●</span> Prompt rewrite</td><td>Propose a new system prompt from the failures; keep it only if it beats the incumbent on the same train pass</td><td>1 call + a full train re-score</td><td>Prompts (GEPA-inspired)</td></tr>
       <tr><td><span style="color:var(--arm-b)">●</span> Retrieved few-shot</td><td>Bank train outputs scoring ≥ 4.0; retrieve the two most similar as examples</td><td>none, but every prompt gets longer</td><td>Retrieval of past wins</td></tr>
     </tbody>
   </table>
   </div>
-  <p class="foot">Baseline gets three extra held-out runs. Pooled with every layer's iteration 0 (same prompt), they give the noise band on the next slides.</p>
+  <p class="foot">Every held-out run that used the unchanged base prompt (baseline iterations, three extra baseline runs, each layer’s iteration 0, and rewrite iterations before an accept) forms the null on the next slides.</p>
 </section>
 
 <!-- 4 -->

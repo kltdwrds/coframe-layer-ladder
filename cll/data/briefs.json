@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ledger-coffee",
+    "split": "train",
+    "brief": "Subscription specialty coffee roaster, small batch, ships weekly",
+    "audience": "Remote workers 25-40 who care about taste",
+    "goal": "Convert visitors to a first-bag trial",
+    "voice": "warm, a bit nerdy",
+    "forbidden_claims": [
+      "#1 coffee in the world",
+      "clinically proven"
+    ]
+  },
+  {
+    "id": "pillar-legal",
+    "split": "train",
+    "brief": "Contract review tool for startup founders",
+    "audience": "Non-lawyer founders pre-Series A",
+    "goal": "Book a demo",
+    "voice": "plain, calm, precise",
+    "forbidden_claims": [
+      "replaces your lawyer",
+      "guaranteed compliance"
+    ]
+  },
+  {
+    "id": "trailhead-gear",
+    "split": "train",
+    "brief": "Ultralight backpacking gear store",
+    "audience": "Weekend hikers upgrading kit",
+    "goal": "Drive to the new-arrivals page",
+    "voice": "outdoorsy, understated",
+    "forbidden_claims": [
+      "unbreakable",
+      "lifetime waterproof"
+    ]
+  },
+  {
+    "id": "kiln-fitness",
+    "split": "train",
+    "brief": "Boutique strength gym with small group coaching",
+    "audience": "Busy professionals 30-50 new to lifting",
+    "goal": "Book a free intro session",
+    "voice": "encouraging, no-hype",
+    "forbidden_claims": [
+      "lose 20 lbs in 2 weeks",
+      "guaranteed results"
+    ]
+  },
+  {
+    "id": "harbor-bank",
+    "split": "train",
+    "brief": "Online savings account for freelancers",
+    "audience": "Self-employed people with irregular income",
+    "goal": "Open an account",
+    "voice": "trustworthy, direct",
+    "forbidden_claims": [
+      "risk-free returns",
+      "highest rate in the country"
+    ]
+  },
+  {
+    "id": "nimbus-ci",
+    "split": "train",
+    "brief": "Fast CI service for monorepos",
+    "audience": "Engineering leads at 20-200 person companies",
+    "goal": "Start a free trial",
+    "voice": "technical, dry humor",
+    "forbidden_claims": [
+      "zero downtime ever",
+      "10x faster than everything"
+    ]
+  },
+  {
+    "id": "petal-florist",
+    "split": "train",
+    "brief": "Same-day local flower delivery in Chicago",
+    "audience": "Last-minute gift buyers",
+    "goal": "Place an order",
+    "voice": "friendly, warm",
+    "forbidden_claims": [
+      "freshest flowers anywhere",
+      "never wilt"
+    ]
+  },
+  {
+    "id": "sable-sleep",
+    "split": "train",
+    "brief": "Weighted sleep mask and wind-down audio app",
+    "audience": "Adults with trouble falling asleep",
+    "goal": "Start 14-day trial",
+    "voice": "soft, reassuring",
+    "forbidden_claims": [
+      "cures insomnia",
+      "doctor recommended"
+    ]
+  },
+  {
+    "id": "orbit-hr",
+    "split": "heldout",
+    "brief": "Onboarding software for HR teams at mid-size companies",
+    "audience": "HR managers, 200-1000 employees",
+    "goal": "Request pricing",
+    "voice": "professional, concrete",
+    "forbidden_claims": [
+      "eliminates all paperwork",
+      "100% error free"
+    ]
+  },
+  {
+    "id": "fern-vet",
+    "split": "heldout",
+    "brief": "Neighborhood veterinary clinic with evening hours",
+    "audience": "Dog and cat owners in the area",
+    "goal": "Book an appointment",
+    "voice": "caring, down to earth",
+    "forbidden_claims": [
+      "pain-free guaranteed",
+      "best vets in the city"
+    ]
+  },
+  {
+    "id": "quill-edu",
+    "split": "heldout",
+    "brief": "Online writing course for adult beginners",
+    "audience": "People who want to write but never started",
+    "goal": "Enroll in the next cohort",
+    "voice": "encouraging, literate",
+    "forbidden_claims": [
+      "become a bestselling author",
+      "guaranteed publication"
+    ]
+  },
+  {
+    "id": "mason-solar",
+    "split": "heldout",
+    "brief": "Residential solar installer, financing available",
+    "audience": "Homeowners with high summer electric bills",
+    "goal": "Get a free quote",
+    "voice": "straightforward, practical",
+    "forbidden_claims": [
+      "eliminate your power bill forever",
+      "no cost to you ever"
+    ]
+  }
+]

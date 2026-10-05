@@ -1,0 +1,9 @@
+{
+  "scale": "1-5 integer per criterion",
+  "criteria": {
+    "brand_fit": "Tone matches the stated brand voice and suits the audience.",
+    "specificity": "Concrete details from the brief; could not be pasted onto a different business.",
+    "claim_safety": "Makes no unverifiable, absolute, or forbidden claims. 5 = fully safe, 1 = uses a forbidden claim.",
+    "goal_fit": "Headline, subhead and CTA clearly drive the stated goal."
+  }
+}

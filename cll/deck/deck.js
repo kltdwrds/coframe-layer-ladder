@@ -264,12 +264,22 @@
     prev.disabled = current === 0; next.disabled = current === slides.length - 1;
     progress.style.width = ((current + 1) / slides.length * 100) + "%";
     if (history.replaceState) history.replaceState(null, "", "#" + (current + 1));
+    fit(slides[current]);
     prime(slides[current]); requestAnimationFrame(function () { play(slides[current]); });
   }
+  // Shrink a slide that is taller than the frame until it fits (floor 70%), instead of clipping or scrolling.
+  function fit(slide) {
+    slide.style.zoom = 1;
+    for (var k = 0; k < 3 && slide.scrollHeight > slide.clientHeight + 1; k++) {
+      var z = Math.max(0.7, (parseFloat(slide.style.zoom) || 1) * slide.clientHeight / slide.scrollHeight);
+      slide.style.zoom = z;
+    }
+  }
+  window.addEventListener("resize", function () { if (presenting.matches) fit(slides[current]); });
   var presenting = window.matchMedia("(min-width: 761px) and (min-aspect-ratio: 4/5)");
   function applyMode() {
     if (presenting.matches) show(current);
-    else slides.forEach(function (s) { s.removeAttribute("aria-hidden"); prime(s); play(s); });
+    else slides.forEach(function (s) { s.style.zoom = ""; s.removeAttribute("aria-hidden"); prime(s); play(s); });
   }
   current = fromHash(); applyMode();
   if (presenting.addEventListener) presenting.addEventListener("change", applyMode);

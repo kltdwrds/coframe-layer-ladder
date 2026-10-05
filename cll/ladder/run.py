@@ -18,7 +18,9 @@ if a.dry:
     upd=2*a.iters
     juds=gens*J
     # token assumptions per call (in,out), measured roughly from prompt sizes
-    tok={"gen":(250,50),"judge":(450,60),"upd":(400,150)}
+    # judge (in,out) measured in results/judge_calibration.md; reasoning judges spend ~800 output tokens thinking
+    JT={"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(310,55),"@cf/deepseek-ai/deepseek-v4-pro-0813":(320,790),"@cf/zai-org/glm-5.3":(320,690)}
+    tok={"gen":(250,50),"judge":JT.get(JUDGE_MODEL,(450,800)),"upd":(400,150)}
     def usd(m,n,k): pi,po=PRICE[m]; i,o=tok[k]; return n*(i*pi+o*po)/1e6
     d=usd(GEN_MODEL,gens,"gen")+usd(GEN_MODEL,upd,"upd")+usd(JUDGE_MODEL,juds,"judge")
     neu=d*NEURONS_PER_USD

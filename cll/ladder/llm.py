@@ -6,7 +6,8 @@ from openai import OpenAI
 GEN_MODEL=os.getenv("GEN_MODEL","@cf/meta/llama-3.1-8b-instruct-fp8")
 JUDGE_MODEL=os.getenv("JUDGE_MODEL","@cf/meta/llama-3.3-70b-instruct-fp8-fast")
 # USD per 1M tokens (in, out), Workers AI list price ($0.011 / 1k neurons). Edit if prices change.
-PRICE={"@cf/meta/llama-3.1-8b-instruct-fp8":(0.152,0.287),"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(0.293,2.253)}
+PRICE={"@cf/meta/llama-3.1-8b-instruct-fp8":(0.152,0.287),"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(0.293,2.253),
+       "@cf/deepseek-ai/deepseek-v4-pro-0813":(1.32,3.96),"@cf/moonshotai/kimi-k2.6":(0.95,4.0),"@cf/zai-org/glm-5.3":(1.4,4.4)}
 NEURONS_PER_USD=1000/0.011
 _c=None; USAGE={"usd":0.0,"tokens":0,"calls":0}
 def env(k):
@@ -30,7 +31,7 @@ def chat(model,system,user,temperature=0.7,json_mode=False,max_tokens=400,meta=N
     u=r.usage; pi,po=PRICE.get(model,(0.293,2.253))
     USAGE["usd"]+=(u.prompt_tokens*pi+u.completion_tokens*po)/1e6
     USAGE["tokens"]+=u.prompt_tokens+u.completion_tokens; USAGE["calls"]+=1
-    c=r.choices[0].message.content
+    c=r.choices[0].message.content or ""  # reasoning models can return None if max_tokens runs out mid-thought
     # Workers AI json_object mode can hand back an already-parsed object
     return c if isinstance(c,str) else json.dumps(c)
 def parse_json(t):

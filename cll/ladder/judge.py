@@ -1,4 +1,4 @@
-import json, statistics
+import json, os, statistics
 from .llm import chat, parse_json, JUDGE_MODEL
 RUB=json.load(open("data/rubric.json"))
 SYS="You are a strict marketing copy reviewer. Score only against the rubric. Reply JSON only."
@@ -8,7 +8,7 @@ def judge_once(brief,out,meta=None):
 Return JSON: {{"brand_fit":int,"specificity":int,"claim_safety":int,"goal_fit":int,"note":"one sentence on the biggest weakness"}}"""
     for attempt in range(2):
         try:
-            r=parse_json(chat(JUDGE_MODEL,SYS,u,temperature=0.0,json_mode=True,max_tokens=200,meta=meta))
+            r=parse_json(chat(JUDGE_MODEL,SYS,u,temperature=0.0,json_mode=True,max_tokens=int(os.getenv('JUDGE_MAX_TOKENS','4000')),meta=meta))
             r.update({k:min(5,max(1,int(float(r[k])))) for k in KEYS})
             return r
         except (ValueError,KeyError,TypeError) as e:

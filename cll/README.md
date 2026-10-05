@@ -56,6 +56,49 @@ Bugs fixed:
 Not changed (by design, noted as caveats): the generator is never shown `forbidden_claims` (only the judge is), so claim safety
 is something layers must learn. Judge repeats at temp 0 mostly measure server nondeterminism, not judge variance.
 
+## Findings (Oct 2026 run)
+
+Two full runs on Workers AI through AI Gateway, same generator (llama-3.1-8b-instruct-fp8), same code, different judge.
+Artifacts: `results_70b/` (judge llama-3.3-70b-instruct-fp8-fast) and `results/` (judge deepseek-v4-pro-0813).
+
+### 1. The free-tier judge capped the loop (run 1)
+Baseline held-out scored 4.56 of 5 on average (7 base-prompt runs), with a noise range of 0.71. Final held-out:
+baseline 4.69, lesson 4.88, rewrite 4.81, few-shot 4.81. Three layers finish "above the band", but only by 0.06-0.13,
+on one 4-brief draw, and the band's lower edge comes from a single outlier (lesson layer's iteration 0, before any
+learning, at 4.04). **No gain in run 1 is distinguishable from noise.** The judge gave 5.0 to copy with a preamble,
+markdown and a five-line layout, because the rubric has no format criterion.
+
+### 2. Picking the judge by test (`ladder/calibrate.py`, train briefs only)
+16 hand-written items: 5 good, 7 with one planted defect, 4 plausible but generic.
+
+judge | defects caught | good | mediocre | defect | good-mediocre gap | repeat-inconsistent at temp 0 | $/call
+--|--|--|--|--|--|--|--
+llama-3.3-70b | 7/7 | 4.85 | 3.56 | 2.39 | +1.29 | 0/16 | 0.0002
+deepseek-v4-pro | 7/7 | 4.90 | 2.50 | 1.88 | +2.40 | 9/16 | 0.0034
+glm-5.3 | 7/7 | 4.80 | 2.66 | 2.27 | +2.14 | 7/16 | 0.0036
+
+Every judge catches obvious defects. They differ on *mediocre* copy: the 70B scores generic copy that would fit any
+business at 3.56 (one item at 4.0), which is why run 1 had no headroom. Its temp-0 repeats were identical on all
+16 items, so the scaffold's 3x judge averaging bought nothing on that judge. The DeepSeek judge varies at temp 0, so
+averaging does reduce noise there. Caveat: I wrote these labels, so this is a sanity check; the hand scores are the
+independent test. kimi-k2.6 was dropped: its reasoning overran the token budget on the rubric prompt and returned
+empty content.
+
+### 3. Honest failures
+- **Prompt rewrite never fired (run 1: 0 of 4 accepted).** The 8B rewriter returned hero copy instead of a prompt, or
+  prompts locked to one train brief ("...for a savings account designed for freelancers"). Each candidate scored lower
+  on train, and the gate rejected it. The accept-only-if-better gate was the only thing preventing harm, and the line
+  on the plot is just the base prompt plus noise. A GEPA-style reflective edit needs a reflector stronger than the
+  model it is editing.
+- **The lesson distiller ignored "ONE short lesson"** and wrote numbered lists with preambles. The content was
+  sensible (be specific, avoid absolute claims, make the CTA direct).
+- **The few-shot bank was not selective under the lenient judge.** All 8 train outputs cleared the 4.0 threshold,
+  including format-breaking ones, so judge leniency flowed straight into what the layer learned from.
+- **Requested generator was gone.** `@cf/meta/llama-3.1-8b-instruct` was deprecated 2026-05-30 and returned 410; the
+  fp8 build of the same model was used instead.
+
+RUN2_PLACEHOLDER
+
 ## Publish to GitHub
     git init && git add -A && git commit -m "Layer ladder demo scaffold"
     gh repo create coframe-layer-ladder --public --source=. --push

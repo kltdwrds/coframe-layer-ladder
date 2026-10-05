@@ -19,8 +19,8 @@ if a.dry:
     upd=2*a.iters
     juds=gens*J
     # token assumptions per call (in,out), measured roughly from prompt sizes
-    # judge (in,out) measured in results/judge_calibration.md; reasoning judges spend ~800 output tokens thinking
-    JT={"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(310,55),"@cf/deepseek-ai/deepseek-v4-pro-0813":(320,790),"@cf/zai-org/glm-5.3":(320,690)}
+    # judge (in,out) per call: 70B from calibration; DeepSeek from run 2's first pass (real outputs reason longer than calibration items)
+    JT={"@cf/meta/llama-3.3-70b-instruct-fp8-fast":(310,55),"@cf/deepseek-ai/deepseek-v4-pro-0813":(450,1160),"@cf/zai-org/glm-5.3":(320,690)}
     tok={"gen":(250,50),"judge":JT.get(JUDGE_MODEL,(450,800)),"upd":(400,150)}
     def usd(m,n,k): pi,po=PRICE[m]; i,o=tok[k]; return n*(i*pi+o*po)/1e6
     d=usd(GEN_MODEL,gens,"gen")+usd(GEN_MODEL,upd,"upd")+usd(JUDGE_MODEL,juds,"judge")
@@ -37,7 +37,7 @@ def evaluate(layer,bs,tag):
         m={**tag,"brief":b["id"]}
         o=gen(layer,b,{**m,"role":"gen"}); j=judge(b,o,a.judge_n,{**m,"role":"judge"})
         return {"id":b["id"],"brief":b["brief"],"audience":b["audience"],"out":o,**j}
-    with ThreadPoolExecutor(8) as ex: return list(ex.map(one,bs))
+    with ThreadPoolExecutor(int(os.getenv('EVAL_WORKERS','4'))) as ex: return list(ex.map(one,bs))
 mean=lambda r:sum(x["score"] for x in r)/len(r)
 hist={}; samples=[]; os.makedirs("results",exist_ok=True)
 def save(noise=None):
